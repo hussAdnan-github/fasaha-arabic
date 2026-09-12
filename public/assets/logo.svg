@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#059669" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect x="8" y="8" width="104" height="104" rx="30" fill="url(#logoGrad)" filter="url(#shadow)"/>
+  <circle cx="60" cy="58" r="34" fill="#ffffff" opacity="0.18"/>
+  <path d="M42 36 C42 36 60 48 78 36 C78 54 74 76 60 84 C46 76 42 54 42 36 Z" fill="#ffffff" opacity="0.95"/>
+  <path d="M54 46 L66 46 C68 46 70 48 69 51 L63 68 C62 71 58 71 57 68 L51 51 C50 48 52 46 54 46 Z" fill="#059669"/>
+  <circle cx="60" cy="40" r="4" fill="url(#starGrad)"/>
+  <path d="M82 24 L85 30 L91 31 L87 35 L88 41 L82 38 L76 41 L77 35 L73 31 L79 30 Z" fill="url(#starGrad)"/>
+</svg>
