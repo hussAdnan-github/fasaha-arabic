@@ -39,10 +39,10 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 inset-x-0 h-20 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 transition-all border-b border-surface-container">
-      <div className="w-full h-full px-space-lg flex items-center justify-between gap-space-md max-w-7xl mx-auto">
+      <div className="w-full h-full px-2.5 sm:px-space-md md:px-space-lg flex items-center justify-between gap-2 sm:gap-space-md max-w-7xl mx-auto">
         {/* Brand & Logo */}
-        <Link href="/" className="flex items-center gap-space-md min-w-max group">
-          <div className="relative w-9 h-9 transition-transform group-hover:scale-105">
+        <Link href="/" className="flex items-center gap-1.5 sm:gap-space-md shrink-0 group">
+          <div className="relative w-8 h-8 sm:w-9 sm:h-9 transition-transform group-hover:scale-105 shrink-0">
             <Image
               src="/assets/logo.svg"
               alt="Fasaha Arabic Learning Logo"
@@ -52,10 +52,10 @@ export default function Header() {
             />
           </div>
           <div className="flex flex-col">
-            <span className="text-2xl font-bold text-primary tracking-tight font-sans">
+            <span className="text-xl sm:text-2xl font-bold text-primary tracking-tight font-sans">
               فصاحة
             </span>
-            <span className="text-xs text-on-surface-variant hidden sm:inline-block">
+            <span className="text-[10px] sm:text-xs text-on-surface-variant hidden sm:inline-block">
               تعلم العربية بمتعة وتفاعل
             </span>
           </div>
@@ -202,34 +202,43 @@ export default function Header() {
         </div>
 
         {/* Gamification Counters & Profile */}
-        <div className="flex items-center gap-space-sm sm:gap-space-md">
+        <div className="flex items-center gap-1 sm:gap-1.5 md:gap-space-md shrink-0">
           {/* Streak */}
-          <div className="flex items-center gap-1 px-3 py-1 bg-secondary-fixed/50 rounded-full shadow-[0_2px_0_#fea619] transition-transform hover:scale-105">
-            <span className="material-symbols-outlined text-secondary-container text-lg">
+          <div
+            className="flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1 bg-secondary-fixed/50 rounded-full shadow-[0_2px_0_#fea619] transition-transform hover:scale-105 shrink-0"
+            title={`${streakDays} أيام متتالية`}
+          >
+            <span className="material-symbols-outlined text-secondary-container text-base sm:text-lg">
               local_fire_department
             </span>
             <span className="text-xs font-bold text-on-secondary-fixed">
-              {streakDays} أيام
+              {streakDays} <span className="hidden sm:inline">أيام</span>
             </span>
           </div>
 
           {/* Points / XP */}
-          <div className="flex items-center gap-1 px-3 py-1 bg-tertiary-fixed/50 rounded-full shadow-[0_2px_0_#007bb9] transition-transform hover:scale-105">
-            <span className="material-symbols-outlined text-tertiary text-lg">
+          <div
+            className="flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1 bg-tertiary-fixed/50 rounded-full shadow-[0_2px_0_#007bb9] transition-transform hover:scale-105 shrink-0"
+            title={`${points} نقطة خبرة`}
+          >
+            <span className="material-symbols-outlined text-tertiary text-base sm:text-lg">
               diamond
             </span>
             <span className="text-xs font-bold text-on-tertiary-fixed">
-              {points} نقطة
+              {points} <span className="hidden sm:inline">نقطة</span>
             </span>
           </div>
 
           {/* Hearts */}
-          <div className="flex items-center gap-1 px-3 py-1 bg-error-container/40 rounded-full shadow-[0_2px_0_#ba1a1a] transition-transform hover:scale-105">
-            <span className="material-symbols-outlined text-error text-lg">
+          <div
+            className="flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1 bg-error-container/40 rounded-full shadow-[0_2px_0_#ba1a1a] transition-transform hover:scale-105 shrink-0"
+            title={`${hearts} قلوب متبقية`}
+          >
+            <span className="material-symbols-outlined text-error text-base sm:text-lg">
               favorite
             </span>
             <span className="text-xs font-bold text-on-error-container">
-              {hearts} قلوب
+              {hearts} <span className="hidden sm:inline">قلوب</span>
             </span>
           </div>
 
@@ -240,29 +249,29 @@ export default function Header() {
             role="switch"
             aria-checked={showTashkeel}
             title={showTashkeel ? "تعطيل إظهار التشكيل في كامل المنصة" : "تفعيل إظهار التشكيل في كامل المنصة"}
-            className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-full border transition-all cursor-pointer select-none active:scale-95 shadow-xs ${
+            className={`flex items-center gap-1.5 px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border transition-all cursor-pointer select-none active:scale-95 shadow-xs shrink-0 ${
               showTashkeel
                 ? "bg-primary/10 border-primary/30 text-primary hover:bg-primary/15"
                 : "bg-surface-container border-surface-container-high text-on-surface-variant hover:bg-surface-container-high"
             }`}
           >
-            <span className="material-symbols-outlined text-[18px]">
+            <span className="material-symbols-outlined text-[17px] sm:text-[18px]">
               format_size
             </span>
-            <span className="text-xs font-bold hidden sm:inline">
+            <span className="text-xs font-bold hidden md:inline">
               {showTashkeel ? "التَّشْكِيل: مُفَعَّل" : "التشكيل: مُعطّل"}
             </span>
-            <span className="text-xs font-bold sm:hidden">
+            <span className="text-xs font-bold hidden sm:inline md:hidden">
               {showTashkeel ? "تَشْكِيل" : "تشكيل"}
             </span>
             <div
-              className={`w-7 h-4 rounded-full p-0.5 relative transition-colors duration-200 flex items-center ${
+              className={`w-6 h-3.5 sm:w-7 sm:h-4 rounded-full p-0.5 relative transition-colors duration-200 flex items-center ${
                 showTashkeel ? "bg-primary" : "bg-outline-variant"
               }`}
             >
               <div
-                className={`w-3 h-3 bg-white rounded-full transition-transform duration-200 shadow-xs ${
-                  showTashkeel ? "translate-x-0" : "-translate-x-3"
+                className={`w-2.5 h-2.5 sm:w-3 sm:h-3 bg-white rounded-full transition-transform duration-200 shadow-xs ${
+                  showTashkeel ? "translate-x-0" : "-translate-x-2.5 sm:-translate-x-3"
                 }`}
               />
             </div>
@@ -271,22 +280,22 @@ export default function Header() {
           {/* Mute/Sound Toggle */}
           <button
             onClick={toggleMute}
-            className="hidden sm:flex items-center justify-center w-9 h-9 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface transition-all active:scale-95"
+            className="hidden sm:flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface transition-all active:scale-95 shrink-0"
             type="button"
             title={isMuted ? "تشغيل المؤثرات الصوتية" : "كتم المؤثرات الصوتية"}
           >
-            <span className="material-symbols-outlined text-lg">
+            <span className="material-symbols-outlined text-base sm:text-lg">
               {isMuted ? "volume_off" : "volume_up"}
             </span>
           </button>
 
-          {/* User Avatar */}
-          <div className="relative w-9 h-9 rounded-full overflow-hidden ring-2 ring-primary/20 shadow-sm">
+          {/* Logo Avatar */}
+          <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden ring-2 ring-primary/20 shadow-sm shrink-0 bg-surface-container-lowest p-0.5">
             <Image
-              src="/assets/avatar.png"
-              alt="User Avatar"
+              src="/assets/logo.png"
+              alt="Fasaha Logo"
               fill
-              className="object-cover"
+              className="object-contain"
             />
           </div>
         </div>
