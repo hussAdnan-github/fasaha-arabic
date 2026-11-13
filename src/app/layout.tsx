@@ -5,12 +5,10 @@ import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import MobileNav from "@/components/layout/MobileNav";
 
-export const metadata: Metadata = {
-  title: "فصاحة | تعلم العربية بمتعة وتفاعل",
-  description: "تطبيق تعليمي تفاعلي حديث لتعلم اللغة العربية، المفردات، القواعد والمحادثة بأحدث أساليب التلعيب والمؤثرات الملموسة.",
-  icons: {
-    icon: "/assets/logo.svg",
-  },
+export const metadata = {
+  title: "لغتي",
+  description: "لغتي التطبيق",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({

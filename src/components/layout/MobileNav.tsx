@@ -5,12 +5,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { title: "المستويات", href: "/levels", icon: "layers" },
-  { title: "المفردات", href: "/", icon: "menu_book" },
-  { title: "الأسرة", href: "/family-and-gender", icon: "group" },
+  { title: "المرحلة ٢", href: "/stage-2", icon: "school" },
+  { title: "المرحلة ١", href: "/", icon: "home" },
   { title: "القواعد", href: "/grammar-ladder", icon: "stairs" },
   { title: "المحادثة", href: "/daily-dialogue", icon: "forum" },
   { title: "التمارين", href: "/interactive-practice", icon: "sports_esports" },
+  { title: "الخارطة", href: "/levels", icon: "layers" },
 ];
 
 export default function MobileNav() {

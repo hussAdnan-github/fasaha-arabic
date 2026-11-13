@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLearning } from "@/context/LearningContext";
 import { dialogueExchanges, DialogueMessage } from "@/data/dialogueData";
+import StageOperationsNav from "@/components/layout/StageOperationsNav";
 
 export default function DailyDialoguePage() {
   const {
@@ -68,6 +69,9 @@ export default function DailyDialoguePage() {
 
   return (
     <div className="flex flex-col w-full pb-space-xl">
+      {/* Level 1 - Stage 1 Operations Navigation Bar */}
+      <StageOperationsNav />
+
       {/* 1. Top Hero Context Panel */}
       <section className="relative w-full rounded-2xl bg-surface-container-lowest shadow-sm p-space-md md:p-space-lg overflow-hidden mb-space-lg border border-surface-container">
         <div className="absolute -left-12 -bottom-12 w-48 h-48 rounded-full bg-primary-fixed/20 pointer-events-none blur-2xl" />
@@ -76,17 +80,12 @@ export default function DailyDialoguePage() {
         <div className="relative flex flex-col gap-space-md">
           {/* Breadcrumb + Scenario Badges */}
           <div className="flex flex-wrap items-center justify-between gap-space-sm">
-            <div className="flex items-center gap-space-xs flex-wrap">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-fixed/50 text-on-primary-fixed text-xs font-bold shadow-[0_2px_0_#85f8c4]">
-                <span className="material-symbols-outlined text-[16px]">chat</span>
-                المُحَادَثَةُ التَّفَاعُلِيَّة
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed/50 text-on-secondary-fixed text-xs font-bold shadow-[0_2px_0_#fea619]">
-                <span className="material-symbols-outlined text-[16px] text-secondary">
-                  place
-                </span>
-                فِي فِنَاءِ المَدْرَسَةِ (In the Courtyard)
-              </span>
+            <div className="flex items-center gap-space-xs flex-wrap text-xs">
+              <span className="text-primary font-bold">المستوى الأول</span>
+              <span className="material-symbols-outlined text-[14px]">arrow_back_ios</span>
+              <span className="text-on-surface-variant font-medium">المرحلة الأولى: أسرتي وبيتي</span>
+              <span className="material-symbols-outlined text-[14px]">arrow_back_ios</span>
+              <span className="text-secondary font-bold">العملية ٤: المحادثة اليومية والتحيات</span>
             </div>
 
             <div className="flex items-center gap-space-xs text-on-surface-variant text-xs font-medium">

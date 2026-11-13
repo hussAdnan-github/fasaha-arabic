@@ -11,6 +11,7 @@ import {
   MatchPerson,
   MatchTarget,
 } from "@/data/quizData";
+import StageOperationsNav from "@/components/layout/StageOperationsNav";
 
 export default function InteractivePracticePage() {
   const { showTashkeel, playPronunciation, playFeedbackSound, addPoints, decrementHeart } =
@@ -73,6 +74,9 @@ export default function InteractivePracticePage() {
 
   return (
     <div className="flex flex-col w-full pb-space-xl">
+      {/* Level 1 - Stage 1 Operations Navigation Bar */}
+      <StageOperationsNav />
+
       {/* 1. Header Hero Banner */}
       <section className="relative rounded-2xl bg-surface-container-lowest p-space-md sm:p-space-lg shadow-sm overflow-hidden mb-space-lg border border-surface-container">
         <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-secondary-fixed/30 pointer-events-none blur-2xl" />
@@ -83,9 +87,9 @@ export default function InteractivePracticePage() {
             <div className="flex items-center gap-1.5 text-xs text-on-surface-variant flex-wrap">
               <span className="text-primary font-bold">المستوى الأول</span>
               <span className="material-symbols-outlined text-[14px]">arrow_back_ios</span>
-              <span className="text-on-surface-variant font-medium">الوحدة الأولى: أسرتي</span>
+              <span className="text-on-surface-variant font-medium">المرحلة الأولى: أسرتي وبيتي</span>
               <span className="material-symbols-outlined text-[14px]">arrow_back_ios</span>
-              <span className="text-secondary font-bold">الدرس ٤: التمارين التفاعلية</span>
+              <span className="text-secondary font-bold">العملية ٥: التمارين التفاعلية الشاملة</span>
             </div>
 
             <div className="flex items-baseline gap-space-sm flex-wrap mt-2">
@@ -104,7 +108,7 @@ export default function InteractivePracticePage() {
 
           <div className="flex items-center gap-2 bg-primary-fixed/30 px-4 py-2 rounded-full border border-primary/20 text-xs font-bold text-primary self-start lg:self-center">
             <span className="material-symbols-outlined text-base">emoji_events</span>
-            <span>الوحدة الأولى: ٤/٤ تحديات مكتملة</span>
+            <span>المرحلة الأولى: ٤/٤ تحديات مكتملة</span>
           </div>
         </div>
       </section>
@@ -459,17 +463,26 @@ export default function InteractivePracticePage() {
         {/* Finish Action CTA */}
         <div className="relative z-10 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/20">
           <div className="flex items-center gap-2 text-on-primary/90 text-xs font-semibold">
-            <span className="material-symbols-outlined text-sm">lock_open</span>
-            تم فتح الوحدة الثانية بنجاح: «في المدرسة»
+            <span className="material-symbols-outlined text-sm">flag</span>
+            تهانينا! لقد أتممت بنجاح عمليات المرحلة الأولى من المستوى الأول.
           </div>
 
-          <Link
-            href="/"
-            className="w-full sm:w-auto px-8 py-3.5 bg-secondary-container hover:bg-secondary-fixed-dim text-on-secondary-container font-bold rounded-2xl shadow-[0_4px_0_#855300] active:translate-y-1 active:shadow-[0_1px_0_#855300] transition-all flex items-center justify-center gap-3 cursor-pointer"
-          >
-            <span>إنهاء الوحدة الأولى والعودة للمفردات</span>
-            <span className="material-symbols-outlined text-xl rotate-180">arrow_back</span>
-          </Link>
+          <div className="flex items-center gap-3 flex-wrap">
+            <Link
+              href="/levels#stage-1-2"
+              className="px-6 py-3 bg-secondary text-on-secondary font-bold rounded-2xl shadow-[0_3px_0_#855300] hover:brightness-105 active:translate-y-0.5 transition-all flex items-center justify-center gap-2 text-xs"
+            >
+              <span>المرحلة الثانية (قيد الإعداد)</span>
+              <span className="material-symbols-outlined text-lg">school</span>
+            </Link>
+            <Link
+              href="/"
+              className="w-full sm:w-auto px-6 py-3 bg-secondary-container hover:bg-secondary-fixed-dim text-on-secondary-container font-bold rounded-2xl shadow-[0_4px_0_#855300] active:translate-y-1 active:shadow-[0_1px_0_#855300] transition-all flex items-center justify-center gap-2 text-xs"
+            >
+              <span>العودة لمفردات المرحلة الأولى</span>
+              <span className="material-symbols-outlined text-xl rotate-180">arrow_back</span>
+            </Link>
+          </div>
         </div>
       </section>
     </div>

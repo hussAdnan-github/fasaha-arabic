@@ -67,22 +67,22 @@ export default function Header() {
             onClick={() => setIsLevelMenuOpen(!isLevelMenuOpen)}
             className="w-full flex flex-col p-1.5 px-3 rounded-2xl bg-surface-container-low/80 hover:bg-surface-container transition-all border border-surface-container cursor-pointer group text-right shadow-xs active:scale-[0.99]"
             type="button"
-            title="انقر لتبديل المستوى أو استعراض الخارطة"
+            title="انقر لتبديل المستوى واستعراض مراحل المستوى الأول"
           >
             <div className="flex items-center justify-between w-full mb-1 text-xs">
               <div className="flex items-center gap-1.5">
                 <span className="material-symbols-outlined text-primary text-base group-hover:rotate-12 transition-transform">
                   layers
                 </span>
-                <span className="text-on-surface font-bold">
-                  {formatArabic(currentLevel.titleArabic.split(":")[0])} • {formatArabic(currentLevel.units[0]?.titleArabic || currentLevel.subtitle)}
+                <span className="text-on-surface font-extrabold">
+                  {formatArabic("المستوى الأول")} • {formatArabic("المرحلة الثانية: مدرستي وفصلي")}
                 </span>
-                <span className="px-1.5 py-0.2 rounded bg-surface-container-high text-[10px] font-bold text-on-surface-variant font-mono">
-                  {currentLevel.code.split("•")[0].trim()}
+                <span className="px-1.5 py-0.2 rounded bg-secondary-fixed text-[10px] font-bold text-on-secondary-fixed">
+                  المرحلة ٢ (النشطة)
                 </span>
               </div>
               <div className="flex items-center gap-1">
-                <span className="text-primary font-bold">{currentLevel.progressPercent}٪</span>
+                <span className="text-primary font-bold">٥٠٪</span>
                 <span
                   className={`material-symbols-outlined text-[16px] text-on-surface-variant transition-transform duration-200 ${
                     isLevelMenuOpen ? "rotate-180" : ""
@@ -95,7 +95,7 @@ export default function Header() {
             <div className="w-full h-2 bg-surface-container-high rounded-full overflow-hidden p-[1px] shadow-inner">
               <div
                 className="h-full bg-primary rounded-full transition-all duration-500 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)]"
-                style={{ width: `${currentLevel.progressPercent}%` }}
+                style={{ width: "50%" }}
               />
             </div>
           </button>
@@ -106,7 +106,7 @@ export default function Header() {
               <div className="flex items-center justify-between pb-2 mb-2 border-b border-surface-container px-2">
                 <div className="flex items-center gap-1.5">
                   <span className="material-symbols-outlined text-primary text-lg">school</span>
-                  <span className="text-xs font-bold text-on-surface">المستويات التعليمية</span>
+                  <span className="text-xs font-bold text-on-surface">مراحل المستوى الأول التعليمي</span>
                 </div>
                 <Link
                   href="/levels"
@@ -118,73 +118,89 @@ export default function Header() {
                 </Link>
               </div>
 
-              <div className="flex flex-col gap-1.5 max-h-72 overflow-y-auto">
-                {levels.map((lvl) => {
-                  const isCurrent = lvl.id === currentLevelId;
-                  const isUnlocked = unlockedLevels.includes(lvl.id);
+              {/* Level 1 Stages Breakdown */}
+              <div className="flex flex-col gap-1.5 mb-2">
+                <div className="px-1 text-[11px] font-bold text-on-surface-variant">
+                  المستوى الأول (يتكون من مراحل متتابعة):
+                </div>
 
-                  return (
+                {/* Stage 1 Completed */}
+                <Link
+                  href="/"
+                  onClick={() => setIsLevelMenuOpen(false)}
+                  className="flex items-center justify-between p-2.5 rounded-xl border border-surface-container bg-surface-container-low hover:bg-surface-container transition-all"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="w-7 h-7 rounded-lg bg-primary-fixed/50 text-primary flex items-center justify-center text-xs font-bold shrink-0">
+                      ✓
+                    </span>
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-bold text-on-surface">
+                          المرحلة الأولى: أسرتي وبيتي
+                        </span>
+                        <span className="px-1.5 py-0.2 rounded-full bg-primary/20 text-primary text-[9px] font-bold">
+                          مكتملة بنجاح
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-on-surface-variant">
+                        ٥ عمليات تفاعلية مكتملة بالكامل
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-xs font-bold text-primary font-mono">١٠٠٪</span>
+                </Link>
+
+                {/* Stage 2 Active */}
+                <Link
+                  href="/stage-2"
+                  onClick={() => setIsLevelMenuOpen(false)}
+                  className="flex items-center justify-between p-2.5 rounded-xl border border-secondary/40 bg-secondary-fixed/20 hover:bg-secondary-fixed/30 transition-all"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="w-7 h-7 rounded-lg bg-secondary text-on-secondary flex items-center justify-center text-xs font-bold shrink-0">
+                      ٢
+                    </span>
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-bold text-on-surface">
+                          المرحلة الثانية: مدرستي وفصلي
+                        </span>
+                        <span className="px-1.5 py-0.2 rounded-full bg-secondary text-on-secondary text-[9px] font-bold">
+                          النشطة حالياً
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-on-surface-variant">
+                        الأقسام التسعة (المشهد، النحو، ظروف المكان، التذكير والتأنيث)
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-xs font-bold text-secondary font-mono">ادخل ◂</span>
+                </Link>
+              </div>
+
+              {/* Other Levels Preview */}
+              <div className="pt-2 border-t border-surface-container">
+                <div className="flex items-center justify-between px-1 mb-1 text-[11px] font-bold text-on-surface-variant">
+                  <span>المستويات اللاحقة في المنهج:</span>
+                  <span className="text-[10px] text-outline">تُفتح بعد إتمام المستوى الأول</span>
+                </div>
+                <div className="flex flex-col gap-1">
+                  {levels.slice(1).map((lvl) => (
                     <div
                       key={lvl.id}
-                      onClick={() => {
-                        if (isUnlocked) {
-                          setCurrentLevelId(lvl.id);
-                          setIsLevelMenuOpen(false);
-                        }
-                      }}
-                      className={`flex items-center justify-between p-2.5 rounded-xl border transition-all ${
-                        isCurrent
-                          ? "bg-primary/10 border-primary/40 shadow-xs"
-                          : isUnlocked
-                          ? "bg-surface-container-low border-surface-container hover:bg-surface-container cursor-pointer"
-                          : "bg-surface-container-low/40 border-surface-container/50 opacity-60 cursor-not-allowed"
-                      }`}
+                      className="flex items-center justify-between p-1.5 px-2 rounded-lg bg-surface-container-low/40 opacity-70 text-xs"
                     >
-                      <div className="flex items-center gap-2.5">
-                        <div
-                          className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shadow-xs ${
-                            isCurrent
-                              ? "bg-primary text-on-primary"
-                              : isUnlocked
-                              ? "bg-surface-container-high text-on-surface"
-                              : "bg-surface-container text-outline"
-                          }`}
-                        >
+                      <div className="flex items-center gap-2">
+                        <span className="w-5 h-5 rounded bg-surface-container flex items-center justify-center text-[10px] font-bold text-on-surface-variant">
                           {lvl.number}
-                        </div>
-                        <div className="flex flex-col">
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-xs font-bold text-on-surface">
-                              {formatArabic(lvl.titleArabic.split(":")[0])}
-                            </span>
-                            <span className="text-[10px] font-mono px-1 py-0.2 bg-surface-container rounded text-on-surface-variant">
-                              {lvl.code}
-                            </span>
-                          </div>
-                          <span className="text-[10px] text-on-surface-variant truncate max-w-[190px]">
-                            {formatArabic(lvl.subtitle)}
-                          </span>
-                        </div>
+                        </span>
+                        <span className="text-on-surface font-medium">{lvl.titleArabic.split(":")[0]}</span>
                       </div>
-
-                      <div className="flex items-center gap-1.5">
-                        {isCurrent ? (
-                          <span className="px-2 py-0.5 bg-primary text-on-primary rounded-full text-[10px] font-bold">
-                            نشط
-                          </span>
-                        ) : isUnlocked ? (
-                          <span className="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed rounded-full text-[10px] font-bold">
-                            اختيار
-                          </span>
-                        ) : (
-                          <span className="material-symbols-outlined text-outline text-base">
-                            lock
-                          </span>
-                        )}
-                      </div>
+                      <span className="material-symbols-outlined text-outline text-sm">lock</span>
                     </div>
-                  );
-                })}
+                  ))}
+                </div>
               </div>
 
               <div className="pt-2 mt-2 border-t border-surface-container">

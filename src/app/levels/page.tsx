@@ -295,73 +295,184 @@ export default function LevelsPage() {
                 </div>
               </div>
 
-              {/* LEVEL 1: UNITS & ACTUAL LESSONS SHOWCASE */}
-              {lvl.id === "level-1" && lvl.units[0] && (
-                <div className="mt-space-md">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-bold text-on-surface uppercase tracking-wider flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-primary text-base">
-                        menu_book
+              {/* LEVEL 1: MULTI-STAGE ARCHITECTURE (STAGE 1 & STAGE 2) */}
+              {lvl.id === "level-1" && (
+                <div className="mt-space-md flex flex-col gap-6">
+                  {/* Explanatory Banner: Level 1 Structure */}
+                  <div className="flex items-center justify-between p-3 rounded-2xl bg-primary-fixed/20 border border-primary/25 text-xs">
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary text-lg">schema</span>
+                      <span className="font-bold text-on-surface">
+                        هيكلية المستوى الأول: يتألف هذا المستوى من مراحل متتابعة؛ المرحلة الأولى نشطة حالياً، وتليها المرحلة الثانية.
                       </span>
-                      دروس الوحدة الأولى المتاحة للدراسة المباشرة:
-                    </span>
-                    <span className="text-xs text-primary font-bold">
-                      {lvl.units[0].titleArabic} • {lvl.units[0].titleEnglish}
+                    </div>
+                    <span className="px-2 py-0.5 rounded-full bg-primary text-on-primary text-[10px] font-bold">
+                      مرحلتان مجهزتان
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                    {lvl.units[0].lessons.map((lesson, idx) => (
-                      <Link
-                        key={lesson.id}
-                        href={lesson.href}
-                        className={`group p-3.5 rounded-2xl border transition-all flex items-center justify-between gap-3 ${
-                          lesson.completed
-                            ? "bg-surface-container-lowest hover:bg-surface-container-low border-surface-container hover:border-primary/40 shadow-xs"
-                            : "bg-primary/5 border-primary/30 shadow-xs hover:shadow-md"
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div
-                            className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
-                              lesson.completed
-                                ? "bg-primary-fixed/40 text-primary"
-                                : "bg-primary text-on-primary shadow-xs"
-                            }`}
-                          >
-                            <span className="material-symbols-outlined text-xl">
-                              {lesson.icon}
-                            </span>
-                          </div>
-                          <div className="flex flex-col">
-                            <div className="flex items-center gap-1.5">
-                              <span className="text-xs text-on-surface-variant font-mono">
-                                درس {idx + 1}
-                              </span>
-                              <span className="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">
-                                {formatArabic(lesson.titleArabic)}
+                  {/* STAGE 1: AS-SARAH WA AL-BAYT (ACTIVE) */}
+                  {lvl.stages[0] && (
+                    <div className="p-4 rounded-3xl bg-surface-container-low/60 border border-primary/30 shadow-xs">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 pb-2.5 border-b border-surface-container">
+                        <div className="flex items-center gap-2">
+                          <span className="w-7 h-7 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold text-xs">
+                            ١
+                          </span>
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <h3 className="text-base font-extrabold text-on-surface m-0">
+                                {lvl.stages[0].numberLabel}: {formatArabic(lvl.stages[0].titleArabic)}
+                              </h3>
+                              <span className="px-2 py-0.5 rounded-full bg-primary text-on-primary text-[10px] font-bold">
+                                المرحلة النشطة الحالية
                               </span>
                             </div>
-                            <span className="text-[11px] text-on-surface-variant">
-                              {lesson.titleEnglish}
+                            <span className="text-xs text-on-surface-variant">
+                              {lvl.stages[0].titleEnglish} • {lvl.stages[0].description}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 self-start sm:self-center">
+                          <span className="text-xs text-primary font-bold">
+                            {lvl.stages[0].completedLessons} من {lvl.stages[0].totalLessons} عمليات منجزة ({lvl.stages[0].progressPercent}٪)
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Stage 1 Operations Grid */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        {lvl.stages[0].lessons.map((lesson, idx) => (
+                          <Link
+                            key={lesson.id}
+                            href={lesson.href}
+                            className={`group p-3.5 rounded-2xl border transition-all flex items-center justify-between gap-3 ${
+                              lesson.completed
+                                ? "bg-surface-container-lowest hover:bg-surface-container-low border-surface-container hover:border-primary/40 shadow-xs"
+                                : "bg-primary/5 border-primary/30 shadow-xs hover:shadow-md"
+                            }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div
+                                className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
+                                  lesson.completed
+                                    ? "bg-primary-fixed/40 text-primary"
+                                    : "bg-primary text-on-primary shadow-xs"
+                                }`}
+                              >
+                                <span className="material-symbols-outlined text-xl">
+                                  {lesson.icon}
+                                </span>
+                              </div>
+                              <div className="flex flex-col">
+                                <div className="flex items-center gap-1.5">
+                                  <span className="text-[11px] text-on-surface-variant font-mono font-bold">
+                                    عملية {idx + 1}
+                                  </span>
+                                  <span className="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">
+                                    {formatArabic(lesson.titleArabic)}
+                                  </span>
+                                </div>
+                                <span className="text-[11px] text-on-surface-variant line-clamp-1">
+                                  {lesson.description || lesson.titleEnglish}
+                                </span>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center gap-1">
+                              {lesson.completed ? (
+                                <span className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">
+                                  ✓
+                                </span>
+                              ) : (
+                                <span className="px-2 py-0.5 rounded-full bg-primary text-on-primary text-[10px] font-bold animate-pulse">
+                                  ابدأ
+                                </span>
+                              )}
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* STAGE 2: MY SCHOOL & CLASSROOM (ACTIVE NOW IN LEVEL 1) */}
+                  {lvl.stages[1] && (
+                    <div id="stage-1-2" className="p-4 sm:p-5 rounded-3xl bg-secondary-fixed/15 border-2 border-secondary shadow-sm">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-surface-container">
+                        <div className="flex items-center gap-3">
+                          <span className="w-9 h-9 rounded-xl bg-secondary text-on-secondary flex items-center justify-center font-bold text-sm shadow-xs">
+                            ٢
+                          </span>
+                          <div>
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <h3 className="text-lg font-black text-on-surface m-0">
+                                {lvl.stages[1].numberLabel}: {formatArabic(lvl.stages[1].titleArabic)}
+                              </h3>
+                              <span className="px-2.5 py-0.5 rounded-full bg-secondary text-on-secondary text-xs font-bold animate-pulse">
+                                المرحلة النشطة الحالية في المستوى الأول
+                              </span>
+                            </div>
+                            <span className="text-xs text-on-surface-variant font-medium">
+                              {lvl.stages[1].titleEnglish} • {lvl.stages[1].description}
                             </span>
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-1">
-                          {lesson.completed ? (
-                            <span className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">
-                              ✓
-                            </span>
-                          ) : (
-                            <span className="px-2 py-0.5 rounded-full bg-primary text-on-primary text-[10px] font-bold animate-pulse">
+                        <Link
+                          href="/stage-2"
+                          className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-secondary text-on-secondary hover:brightness-105 font-bold text-xs shadow-xs active:translate-y-0.5 transition-all self-start sm:self-center shrink-0 cursor-pointer"
+                        >
+                          <span>دخول المرحلة الثانية (٩ أقسام)</span>
+                          <span className="material-symbols-outlined text-base rotate-180">arrow_forward</span>
+                        </Link>
+                      </div>
+
+                      {/* Stage 2 Operations Grid (9 Sections) */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        {lvl.stages[1].lessons.map((lesson, idx) => (
+                          <Link
+                            key={lesson.id}
+                            href={lesson.href}
+                            className="group p-3.5 rounded-2xl bg-surface-container-lowest hover:bg-surface-container border border-surface-container hover:border-secondary/50 flex items-center justify-between gap-3 transition-all shadow-xs"
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 rounded-xl bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition-transform">
+                                <span className="material-symbols-outlined">{lesson.icon}</span>
+                              </div>
+                              <div className="flex flex-col text-right">
+                                <span className="text-[10px] font-mono text-on-surface-variant font-bold">
+                                  قسم {idx + 1}
+                                </span>
+                                <span className="text-xs font-bold text-on-surface group-hover:text-secondary transition-colors">
+                                  {formatArabic(lesson.titleArabic)}
+                                </span>
+                                <span className="text-[10px] text-on-surface-variant line-clamp-1">
+                                  {lesson.description}
+                                </span>
+                              </div>
+                            </div>
+
+                            <span className="px-2 py-0.5 rounded-full bg-secondary/15 text-secondary text-[10px] font-bold shrink-0">
                               ابدأ
                             </span>
-                          )}
+                          </Link>
+                        ))}
+                      </div>
+
+                      <div className="mt-4 p-3 rounded-2xl bg-surface-container-lowest text-xs text-on-surface-variant flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border border-surface-container">
+                        <div className="flex items-center gap-2">
+                          <span className="material-symbols-outlined text-secondary text-base">verified</span>
+                          <span>
+                            تغطي المرحلة الثانية: المشهد البصري، الجمل الاسمية والفعلية، أقسام الكلمة، مرافق المدرسة، التذكير والتأنيث، والاتجاهات المكانية النسبية.
+                          </span>
                         </div>
-                      </Link>
-                    ))}
-                  </div>
+                        <span className="text-[11px] font-bold text-secondary font-mono shrink-0">
+                          المستوى الأول • المرحلة ٢
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 

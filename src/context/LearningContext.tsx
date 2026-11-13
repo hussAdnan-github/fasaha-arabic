@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { removeTashkeel } from "@/utils/arabic";
-import { curriculumLevels, LevelItem } from "@/data/levelsData";
+import { curriculumLevels, LevelItem, StageItem } from "@/data/levelsData";
 
 interface LearningContextType {
   streakDays: number;
@@ -13,9 +13,12 @@ interface LearningContextType {
   showTashkeel: boolean;
   currentLevelId: string;
   currentLevel: LevelItem;
+  currentStageId: string;
+  currentStage: StageItem;
   levels: LevelItem[];
   unlockedLevels: string[];
   setCurrentLevelId: (id: string) => void;
+  setCurrentStageId: (id: string) => void;
   unlockLevel: (id: string) => void;
   addPoints: (amount: number) => void;
   decrementHeart: () => void;
@@ -38,7 +41,8 @@ export function LearningProvider({ children }: { children: React.ReactNode }) {
   const [audioSpeed, setAudioSpeed] = useState(1);
   const [showTashkeel, setShowTashkeelState] = useState(true);
   const [currentLevelId, setCurrentLevelIdState] = useState("level-1");
-  const [unlockedLevels, setUnlockedLevels] = useState<string[]>(["level-1", "level-2"]);
+  const [currentStageId, setCurrentStageIdState] = useState("stage-1-1");
+  const [unlockedLevels, setUnlockedLevels] = useState<string[]>(["level-1"]);
 
   // Load Tashkeel & Level preferences from localStorage on mount
   useEffect(() => {
@@ -58,6 +62,11 @@ export function LearningProvider({ children }: { children: React.ReactNode }) {
           setCurrentLevelIdState(savedLvl);
         }
 
+        const savedStage = localStorage.getItem("fasaha_current_stage");
+        if (savedStage) {
+          setCurrentStageIdState(savedStage);
+        }
+
         const savedUnlocked = localStorage.getItem("fasaha_unlocked_levels");
         if (savedUnlocked) {
           setUnlockedLevels(JSON.parse(savedUnlocked));
@@ -73,6 +82,18 @@ export function LearningProvider({ children }: { children: React.ReactNode }) {
     if (typeof window !== "undefined") {
       try {
         localStorage.setItem("fasaha_current_level", id);
+      } catch {
+        // Ignore
+      }
+    }
+    playFeedbackSound("tap");
+  };
+
+  const setCurrentStageId = (id: string) => {
+    setCurrentStageIdState(id);
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("fasaha_current_stage", id);
       } catch {
         // Ignore
       }
@@ -98,6 +119,10 @@ export function LearningProvider({ children }: { children: React.ReactNode }) {
 
   const currentLevel =
     curriculumLevels.find((l) => l.id === currentLevelId) || curriculumLevels[0];
+
+  const currentStage =
+    currentLevel.stages.find((s) => s.id === currentStageId) ||
+    currentLevel.stages[0];
 
   const setShowTashkeel = (val: boolean) => {
     setShowTashkeelState(val);
@@ -225,9 +250,12 @@ export function LearningProvider({ children }: { children: React.ReactNode }) {
         showTashkeel,
         currentLevelId,
         currentLevel,
+        currentStageId,
+        currentStage,
         levels: curriculumLevels,
         unlockedLevels,
         setCurrentLevelId,
+        setCurrentStageId,
         unlockLevel,
         addPoints,
         decrementHeart,

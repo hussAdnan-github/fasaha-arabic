@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLearning } from "@/context/LearningContext";
 import { primaryVocabItems, miniFlashcards, VocabItem, MiniFlashcard } from "@/data/vocabularyData";
+import StageOperationsNav from "@/components/layout/StageOperationsNav";
 
 export default function VocabularyPage() {
   const {
@@ -45,6 +46,9 @@ export default function VocabularyPage() {
 
   return (
     <div className="flex flex-col w-full pb-space-xl">
+      {/* Level 1 - Stage 1 Operations Navigation Bar */}
+      <StageOperationsNav />
+
       {/* 1. Header Banner */}
       <section className="relative rounded-2xl bg-surface-container-lowest p-space-md sm:p-space-lg shadow-sm overflow-hidden mb-space-lg border border-surface-container">
         <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-primary-fixed/20 pointer-events-none blur-2xl" />
@@ -56,9 +60,9 @@ export default function VocabularyPage() {
             <div className="flex items-center gap-1.5 text-xs text-on-surface-variant flex-wrap">
               <span className="text-primary font-bold">المستوى الأول</span>
               <span className="material-symbols-outlined text-[14px]">arrow_back_ios</span>
-              <span className="text-on-surface-variant font-medium">الوحدة الأولى: أسرتي</span>
+              <span className="text-on-surface-variant font-medium">المرحلة الأولى: أسرتي وبيتي</span>
               <span className="material-symbols-outlined text-[14px]">arrow_back_ios</span>
-              <span className="text-secondary font-bold">الدرس ١: المفردات المصورة</span>
+              <span className="text-secondary font-bold">العملية ١: المفردات المصورة</span>
             </div>
 
             <div className="flex items-baseline gap-space-sm flex-wrap mt-2">
