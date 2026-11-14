@@ -53,7 +53,7 @@ export default function Header() {
           </div>
           <div className="flex flex-col">
             <span className="text-xl sm:text-2xl font-bold text-primary tracking-tight font-sans">
-              فصاحة
+              لغتي
             </span>
             <span className="text-[10px] sm:text-xs text-on-surface-variant hidden sm:inline-block">
               تعلم العربية بمتعة وتفاعل
