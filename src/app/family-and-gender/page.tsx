@@ -67,11 +67,13 @@ export default function FamilyAndGenderPage() {
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md">
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-1.5 text-xs text-on-surface-variant flex-wrap">
-              <span className="text-primary font-bold">المستوى الأول</span>
+              <Link href="/" className="text-primary font-bold hover:underline">
+                المستوى الأول
+              </Link>
               <span className="material-symbols-outlined text-[14px]">arrow_back_ios</span>
               <span className="text-on-surface-variant font-medium">المرحلة الأولى: أسرتي وبيتي</span>
               <span className="material-symbols-outlined text-[14px]">arrow_back_ios</span>
-              <span className="text-secondary font-bold">العملية ٢: أفراد الأسرة والإشارة</span>
+              <span className="text-secondary font-bold">الدرس ٢: أفراد الأسرة والإشارة</span>
             </div>
 
             <div className="flex items-baseline gap-space-sm flex-wrap mt-2">
@@ -421,18 +423,18 @@ export default function FamilyAndGenderPage() {
 
           <div className="flex items-center gap-space-sm w-full sm:w-auto justify-end">
             <Link
-              href="/"
+              href="/vocabulary"
               className="flex items-center justify-center gap-1.5 px-space-lg h-12 sm:h-14 rounded-full bg-surface-container text-on-surface text-sm font-bold shadow-[0_4px_0_#d2d9f4] active:translate-y-[2px] active:shadow-[0_2px_0_#d2d9f4] hover:bg-surface-container-high transition-all"
             >
               <span className="material-symbols-outlined text-lg">arrow_forward</span>
-              <span>المفردات المصورة</span>
+              <span>الدرس السابق: المفردات المصورة</span>
             </Link>
 
             <Link
               href="/grammar-ladder"
               className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-space-xl h-12 sm:h-14 rounded-full bg-primary text-on-primary text-base font-bold shadow-[0_4px_0_#005137] active:translate-y-[2px] active:shadow-[0_2px_0_#005137] hover:bg-primary-container transition-all text-center"
             >
-              <span>الانتقال لسلم القواعد</span>
+              <span>الدرس التالي: سلم القواعد</span>
               <span className="material-symbols-outlined text-xl rotate-180">arrow_back</span>
             </Link>
           </div>

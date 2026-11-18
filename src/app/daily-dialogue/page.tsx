@@ -81,11 +81,13 @@ export default function DailyDialoguePage() {
           {/* Breadcrumb + Scenario Badges */}
           <div className="flex flex-wrap items-center justify-between gap-space-sm">
             <div className="flex items-center gap-space-xs flex-wrap text-xs">
-              <span className="text-primary font-bold">المستوى الأول</span>
+              <Link href="/" className="text-primary font-bold hover:underline">
+                المستوى الأول
+              </Link>
               <span className="material-symbols-outlined text-[14px]">arrow_back_ios</span>
               <span className="text-on-surface-variant font-medium">المرحلة الأولى: أسرتي وبيتي</span>
               <span className="material-symbols-outlined text-[14px]">arrow_back_ios</span>
-              <span className="text-secondary font-bold">العملية ٤: المحادثة اليومية والتحيات</span>
+              <span className="text-secondary font-bold">الدرس ٤: المحادثة اليومية والتحيات</span>
             </div>
 
             <div className="flex items-center gap-space-xs text-on-surface-variant text-xs font-medium">

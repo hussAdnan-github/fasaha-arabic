@@ -34,11 +34,13 @@ export default function GrammarLadderPage() {
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md">
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-1.5 text-xs text-on-surface-variant flex-wrap">
-              <span className="text-primary font-bold">المستوى الأول</span>
+              <Link href="/" className="text-primary font-bold hover:underline">
+                المستوى الأول
+              </Link>
               <span className="material-symbols-outlined text-[14px]">arrow_back_ios</span>
               <span className="text-on-surface-variant font-medium">المرحلة الأولى: أسرتي وبيتي</span>
               <span className="material-symbols-outlined text-[14px]">arrow_back_ios</span>
-              <span className="text-secondary font-bold">العملية ٣: سلم القواعد والنحو</span>
+              <span className="text-secondary font-bold">الدرس ٣: سلم القواعد والنحو</span>
             </div>
 
             <div className="flex items-baseline gap-space-sm flex-wrap mt-2">

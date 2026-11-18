@@ -49,28 +49,31 @@ export function LearningProvider({ children }: { children: React.ReactNode }) {
     if (typeof window !== "undefined") {
       try {
         const saved = localStorage.getItem("fasaha_show_tashkeel");
-        if (saved !== null) {
-          const parsed = JSON.parse(saved);
-          setShowTashkeelState(parsed);
-          document.documentElement.setAttribute("data-tashkeel", parsed ? "enabled" : "disabled");
-        } else {
-          document.documentElement.setAttribute("data-tashkeel", "enabled");
-        }
-
         const savedLvl = localStorage.getItem("fasaha_current_level");
-        if (savedLvl && curriculumLevels.some((l) => l.id === savedLvl)) {
-          setCurrentLevelIdState(savedLvl);
-        }
-
         const savedStage = localStorage.getItem("fasaha_current_stage");
-        if (savedStage) {
-          setCurrentStageIdState(savedStage);
-        }
-
         const savedUnlocked = localStorage.getItem("fasaha_unlocked_levels");
-        if (savedUnlocked) {
-          setUnlockedLevels(JSON.parse(savedUnlocked));
-        }
+
+        setTimeout(() => {
+          if (saved !== null) {
+            const parsed = JSON.parse(saved);
+            setShowTashkeelState(parsed);
+            document.documentElement.setAttribute("data-tashkeel", parsed ? "enabled" : "disabled");
+          } else {
+            document.documentElement.setAttribute("data-tashkeel", "enabled");
+          }
+
+          if (savedLvl && curriculumLevels.some((l) => l.id === savedLvl)) {
+            setCurrentLevelIdState(savedLvl);
+          }
+
+          if (savedStage) {
+            setCurrentStageIdState(savedStage);
+          }
+
+          if (savedUnlocked) {
+            setUnlockedLevels(JSON.parse(savedUnlocked));
+          }
+        }, 0);
       } catch {
         // Ignore localStorage errors
       }

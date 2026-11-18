@@ -3,9 +3,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLearning } from "@/context/LearningContext";
 
 export default function Header() {
+  const pathname = usePathname();
+  const isStage2 = pathname.startsWith("/stage-2");
+  const isHub = pathname === "/";
   const {
     streakDays,
     points,
@@ -15,11 +19,7 @@ export default function Header() {
     showTashkeel,
     toggleTashkeel,
     formatArabic,
-    currentLevel,
-    currentLevelId,
-    setCurrentLevelId,
     levels,
-    unlockedLevels,
   } = useLearning();
 
   const [isLevelMenuOpen, setIsLevelMenuOpen] = useState(false);
@@ -75,10 +75,16 @@ export default function Header() {
                   layers
                 </span>
                 <span className="text-on-surface font-extrabold">
-                  {formatArabic("المستوى الأول")} • {formatArabic("المرحلة الثانية: مدرستي وفصلي")}
+                  {formatArabic("المستوى الأول")} • {isStage2 ? formatArabic("المرحلة ٢: مدرستي") : isHub ? formatArabic("مركز التعلم والمسار") : formatArabic("المرحلة ١: أسرتي")}
                 </span>
-                <span className="px-1.5 py-0.2 rounded bg-secondary-fixed text-[10px] font-bold text-on-secondary-fixed">
-                  المرحلة ٢ (النشطة)
+                <span className={`px-1.5 py-0.2 rounded text-[10px] font-bold ${
+                  isStage2
+                    ? "bg-secondary-fixed text-on-secondary-fixed"
+                    : isHub
+                    ? "bg-primary-fixed text-on-primary-fixed"
+                    : "bg-surface-container-high text-on-surface"
+                }`}>
+                  {isStage2 ? "المرحلة ٢ (٩ أقسام)" : isHub ? "نظرة عامة" : "المرحلة ١ (٥ دروس)"}
                 </span>
               </div>
               <div className="flex items-center gap-1">
@@ -95,7 +101,7 @@ export default function Header() {
             <div className="w-full h-2 bg-surface-container-high rounded-full overflow-hidden p-[1px] shadow-inner">
               <div
                 className="h-full bg-primary rounded-full transition-all duration-500 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)]"
-                style={{ width: "50%" }}
+                style={{ width: isStage2 ? "65%" : isHub ? "50%" : "40%" }}
               />
             </div>
           </button>
@@ -120,19 +126,37 @@ export default function Header() {
 
               {/* Level 1 Stages Breakdown */}
               <div className="flex flex-col gap-1.5 mb-2">
-                <div className="px-1 text-[11px] font-bold text-on-surface-variant">
-                  المستوى الأول (يتكون من مراحل متتابعة):
-                </div>
-
-                {/* Stage 1 Completed */}
+                {/* Level Hub */}
                 <Link
                   href="/"
                   onClick={() => setIsLevelMenuOpen(false)}
-                  className="flex items-center justify-between p-2.5 rounded-xl border border-surface-container bg-surface-container-low hover:bg-surface-container transition-all"
+                  className="flex items-center justify-between p-2 rounded-xl border border-surface-container bg-surface-container-low hover:bg-surface-container transition-all"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="w-7 h-7 rounded-lg bg-primary text-on-primary flex items-center justify-center text-xs font-bold shrink-0">
+                      <span className="material-symbols-outlined text-sm">dashboard</span>
+                    </span>
+                    <div className="flex flex-col">
+                      <span className="text-xs font-bold text-on-surface">
+                        مركز وبوابة المستوى الأول
+                      </span>
+                      <span className="text-[10px] text-on-surface-variant">
+                        الخارطة الشاملة لجميع مراحل ودروس المستوى
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-xs font-bold text-primary font-mono">الرئيسية ◂</span>
+                </Link>
+
+                {/* Stage 1 */}
+                <Link
+                  href="/vocabulary"
+                  onClick={() => setIsLevelMenuOpen(false)}
+                  className="flex items-center justify-between p-2.5 rounded-xl border border-surface-container bg-surface-container-lowest hover:bg-surface-container-low transition-all"
                 >
                   <div className="flex items-center gap-2">
                     <span className="w-7 h-7 rounded-lg bg-primary-fixed/50 text-primary flex items-center justify-center text-xs font-bold shrink-0">
-                      ✓
+                      ١
                     </span>
                     <div className="flex flex-col">
                       <div className="flex items-center gap-1">
@@ -140,18 +164,18 @@ export default function Header() {
                           المرحلة الأولى: أسرتي وبيتي
                         </span>
                         <span className="px-1.5 py-0.2 rounded-full bg-primary/20 text-primary text-[9px] font-bold">
-                          مكتملة بنجاح
+                          ٥ دروس
                         </span>
                       </div>
                       <span className="text-[10px] text-on-surface-variant">
-                        ٥ عمليات تفاعلية مكتملة بالكامل
+                        المفردات، الإشارة، سلم القواعد، المحادثة، والتمارين
                       </span>
                     </div>
                   </div>
-                  <span className="text-xs font-bold text-primary font-mono">١٠٠٪</span>
+                  <span className="text-xs font-bold text-primary font-mono">ادخل ◂</span>
                 </Link>
 
-                {/* Stage 2 Active */}
+                {/* Stage 2 */}
                 <Link
                   href="/stage-2"
                   onClick={() => setIsLevelMenuOpen(false)}
@@ -167,11 +191,11 @@ export default function Header() {
                           المرحلة الثانية: مدرستي وفصلي
                         </span>
                         <span className="px-1.5 py-0.2 rounded-full bg-secondary text-on-secondary text-[9px] font-bold">
-                          النشطة حالياً
+                          ٩ أقسام
                         </span>
                       </div>
                       <span className="text-[10px] text-on-surface-variant">
-                        الأقسام التسعة (المشهد، النحو، ظروف المكان، التذكير والتأنيث)
+                        المشهد، النحو، ظروف المكان، وتأنيث المهن
                       </span>
                     </div>
                   </div>

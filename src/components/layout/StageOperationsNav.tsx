@@ -11,11 +11,9 @@ interface StageOperationsNavProps {
 
 export default function StageOperationsNav({ compact = false }: StageOperationsNavProps) {
   const pathname = usePathname();
-  const { currentLevel, formatArabic } = useLearning();
+  const { formatArabic, playFeedbackSound } = useLearning();
 
   const isStage2 = pathname.startsWith("/stage-2");
-  const stage1 = currentLevel.stages[0];
-  const stage2 = currentLevel.stages[1];
 
   // Stage 1 operations
   const stage1Operations = [
@@ -23,187 +21,200 @@ export default function StageOperationsNav({ compact = false }: StageOperationsN
       id: "vocab",
       number: 1,
       title: "المفردات المصورة",
-      href: "/",
+      englishTitle: "Vocabulary",
+      href: "/vocabulary",
       icon: "menu_book",
-      completed: true,
     },
     {
       id: "family",
       number: 2,
       title: "أفراد الأسرة والإشارة",
+      englishTitle: "Family & Demonstratives",
       href: "/family-and-gender",
       icon: "group",
-      completed: true,
     },
     {
       id: "grammar",
       number: 3,
       title: "سلم القواعد: النحو",
+      englishTitle: "Grammar Ladder",
       href: "/grammar-ladder",
       icon: "stairs",
-      completed: true,
     },
     {
       id: "dialogue",
       number: 4,
       title: "المحادثة اليومية",
+      englishTitle: "Daily Dialogue",
       href: "/daily-dialogue",
       icon: "forum",
-      completed: true,
     },
     {
       id: "practice",
       number: 5,
       title: "التمارين التفاعلية",
+      englishTitle: "Interactive Practice",
       href: "/interactive-practice",
       icon: "sports_esports",
-      completed: true,
     },
   ];
 
-  // Stage 2 operations (9 Sections)
-  const stage2Operations = [
-    { number: 1, title: "المشهد البصري", href: "/stage-2#campus", icon: "domain" },
-    { number: 2, title: "الجمل النموذجية", href: "/stage-2#sentences", icon: "article" },
-    { number: 3, title: "أقسام الكلمة", href: "/stage-2#word-types", icon: "category" },
-    { number: 4, title: "مرافق المدرسة", href: "/stage-2#facilities", icon: "apartment" },
-    { number: 5, title: "تمرين التذكر", href: "/stage-2#facility-quiz", icon: "quiz" },
-    { number: 6, title: "البنية النحوية", href: "/stage-2#grammar-structure", icon: "schema" },
-    { number: 7, title: "التذكير والتأنيث", href: "/stage-2#gender-professions", icon: "switch_account" },
-    { number: 8, title: "ظروف المكان", href: "/stage-2#spatial-classroom", icon: "explore" },
-    { number: 9, title: "التدريب النسبي", href: "/stage-2#perspective-test", icon: "compare_arrows" },
-  ];
-
-  const currentOpIndex = isStage2
-    ? -1
-    : stage1Operations.findIndex((op) => op.href === pathname);
+  const currentOpIndex = stage1Operations.findIndex((op) => op.href === pathname);
+  const currentOp = currentOpIndex !== -1 ? stage1Operations[currentOpIndex] : null;
+  const prevOp = currentOpIndex > 0 ? stage1Operations[currentOpIndex - 1] : null;
+  const nextOp = currentOpIndex !== -1 && currentOpIndex < stage1Operations.length - 1
+    ? stage1Operations[currentOpIndex + 1]
+    : null;
 
   return (
     <div className="w-full mb-space-md">
-      {/* 1. Header Banner & Hierarchy Breadcrumb Strip */}
+      {/* 1. Main Stage Breadcrumb & Controls Bar */}
       <div className="rounded-2xl bg-surface-container-lowest border border-surface-container shadow-xs p-3 sm:px-4 sm:py-2.5 mb-2">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-          {/* Main Context Hierarchy */}
+          {/* Main Context Hierarchy Breadcrumbs */}
           <div className="flex items-center gap-1.5 text-xs text-on-surface-variant flex-wrap font-medium">
             <Link
-              href="/levels"
-              className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-bold hover:underline transition-colors"
+              href="/"
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 text-primary font-bold hover:bg-primary/20 transition-colors"
+              title="العودة إلى لوحة تحكم المستوى الأول"
             >
               <span className="material-symbols-outlined text-[15px]">layers</span>
-              {formatArabic("المستوى الأول")}
+              <span>{formatArabic("المستوى الأول")}</span>
             </Link>
-            <span className="material-symbols-outlined text-[13px] text-on-surface-variant/70">
+
+            <span className="material-symbols-outlined text-[13px] text-on-surface-variant/60">
               arrow_back_ios
             </span>
+
             <span
-              className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-bold ${
+              className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full font-bold ${
                 isStage2
                   ? "bg-secondary-fixed text-on-secondary-fixed"
-                  : "bg-surface-container text-on-surface-variant"
+                  : "bg-surface-container text-on-surface"
               }`}
             >
               <span className="material-symbols-outlined text-[15px]">
-                {isStage2 ? "school" : "flag"}
+                {isStage2 ? "school" : "home"}
               </span>
-              {isStage2 ? formatArabic("المرحلة الثانية: مدرستي وفصلي") : formatArabic("المرحلة الأولى: أسرتي وبيتي")}
+              <span>
+                {isStage2
+                  ? formatArabic("المرحلة الثانية: مدرستي وفصلي")
+                  : formatArabic("المرحلة الأولى: أسرتي وبيتي")}
+              </span>
             </span>
-            {!isStage2 && currentOpIndex !== -1 && (
+
+            {currentOp && (
               <>
-                <span className="material-symbols-outlined text-[13px] text-on-surface-variant/70">
+                <span className="material-symbols-outlined text-[13px] text-on-surface-variant/60">
                   arrow_back_ios
                 </span>
-                <span className="text-on-surface font-bold">
-                  العملية {stage1Operations[currentOpIndex].number}: {stage1Operations[currentOpIndex].title}
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-surface-container-high text-primary font-bold">
+                  <span>الدرس {currentOp.number}:</span>
+                  <span>{currentOp.title}</span>
                 </span>
               </>
             )}
-            {isStage2 && (
-              <span className="text-[11px] font-bold text-primary hidden md:inline">
-                • ٤ محطات رئيسية • ٩ أقسام تفاعلية
-              </span>
-            )}
           </div>
 
-          {/* Stage Switcher Pills */}
+          {/* Quick Stage 1 / Stage 2 Switcher Tabs */}
           <div className="flex items-center gap-2 self-start sm:self-center">
-            {/* Stage 1 Tab */}
             <Link
-              href="/"
+              href="/vocabulary"
               className={`flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-bold transition-all border ${
                 !isStage2
-                  ? "bg-surface-container text-primary border-primary/40 shadow-xs"
+                  ? "bg-primary-container text-on-primary-container border-primary shadow-xs"
                   : "bg-surface-container-low hover:bg-surface-container text-on-surface-variant border-surface-container"
               }`}
             >
-              <span className="material-symbols-outlined text-[15px] text-primary">check_circle</span>
-              <span>المرحلة الأولى (مكتملة ✓)</span>
+              <span className="material-symbols-outlined text-[15px]">home</span>
+              <span>المرحلة الأولى</span>
+              <span className="text-[10px] px-1 rounded bg-primary-fixed text-on-primary-fixed">٥ دروس</span>
             </Link>
 
-            {/* Stage 2 Tab */}
             <Link
               href="/stage-2"
               className={`flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-bold transition-all border ${
                 isStage2
-                  ? "bg-primary text-on-primary border-primary shadow-xs"
-                  : "bg-secondary text-on-secondary border-secondary hover:brightness-105 shadow-xs"
+                  ? "bg-secondary-container text-on-secondary-container border-secondary shadow-xs"
+                  : "bg-surface-container-low hover:bg-surface-container text-on-surface-variant border-surface-container"
               }`}
             >
               <span className="material-symbols-outlined text-[15px]">school</span>
-              <span>المرحلة الثانية: مدرستي</span>
-              {isStage2 ? (
-                <span className="px-1.5 py-0.2 rounded-full bg-white/20 text-[9px]">النشطة</span>
-              ) : (
-                <span className="px-1.5 py-0.2 rounded-full bg-white/20 text-[9px] animate-pulse">ادخل الآن</span>
-              )}
+              <span>المرحلة الثانية</span>
+              <span className="text-[10px] px-1 rounded bg-secondary-fixed text-on-secondary-fixed">٩ أقسام</span>
             </Link>
           </div>
         </div>
       </div>
 
-      {/* 2. Operations Flow Steps Track (Shown only for Stage 1) */}
+      {/* 2. Linear Step Progress Track (Shown on Stage 1 lesson pages) */}
       {!compact && !isStage2 && (
-        <div className="w-full">
-          {/* Stage 1: 5 Operations */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
-            {stage1Operations.map((op) => {
-              const isActive = pathname === op.href;
-              return (
-                <Link
-                  key={op.id}
-                  href={op.href}
-                  className={`group relative p-2.5 sm:p-3 rounded-xl border transition-all flex flex-col justify-between gap-2 ${
-                    isActive
-                      ? "bg-primary-container text-on-primary-container border-primary/40 shadow-xs ring-2 ring-primary/20 -translate-y-0.5"
-                      : "bg-surface-container-lowest hover:bg-surface-container-low border-surface-container text-on-surface hover:border-primary/30"
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold bg-primary-fixed/50 text-primary">
-                      ✓
+        <div className="rounded-2xl bg-surface-container-low/70 border border-surface-container p-2 sm:p-2.5">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
+            {/* Step Pills 1 -> 5 */}
+            <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto py-0.5 no-scrollbar">
+              {stage1Operations.map((op) => {
+                const isActive = pathname === op.href;
+                return (
+                  <Link
+                    key={op.id}
+                    href={op.href}
+                    onClick={() => playFeedbackSound("tap")}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                      isActive
+                        ? "bg-primary text-on-primary shadow-sm ring-2 ring-primary/30"
+                        : "bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant hover:text-on-surface border border-surface-container"
+                    }`}
+                  >
+                    <span
+                      className={`w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-mono font-bold ${
+                        isActive
+                          ? "bg-white/20 text-white"
+                          : "bg-surface-container-high text-on-surface-variant"
+                      }`}
+                    >
+                      {op.number}
                     </span>
-                    <span className="material-symbols-outlined text-lg opacity-80 group-hover:scale-110 transition-transform">
-                      {op.icon}
-                    </span>
-                  </div>
+                    <span>{op.title}</span>
+                  </Link>
+                );
+              })}
+            </div>
 
-                  <div className="flex flex-col text-right">
-                    <div className="flex items-center gap-1">
-                      <span className="text-[10px] font-mono text-on-surface-variant font-bold">
-                        عملية {op.number}
-                      </span>
-                      {isActive && (
-                        <span className="px-1.5 py-0.2 rounded-full bg-primary text-on-primary text-[9px] font-bold">
-                          أنت هنا
-                        </span>
-                      )}
-                    </div>
-                    <span className="text-xs font-bold leading-snug line-clamp-1 group-hover:text-primary transition-colors">
-                      {op.title}
-                    </span>
-                  </div>
+            {/* Previous / Next Quick Jumps */}
+            <div className="flex items-center gap-1.5 self-end sm:self-center shrink-0">
+              {prevOp ? (
+                <Link
+                  href={prevOp.href}
+                  className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-surface-container-lowest hover:bg-surface-container text-on-surface text-xs font-bold border border-surface-container transition-all"
+                  title={`السابق: ${prevOp.title}`}
+                >
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                  <span className="hidden md:inline">السابق</span>
                 </Link>
-              );
-            })}
+              ) : (
+                <span className="text-on-surface-variant/40 text-xs px-2 select-none">البداية</span>
+              )}
+
+              {nextOp ? (
+                <Link
+                  href={nextOp.href}
+                  className="flex items-center gap-1 px-3 py-1 rounded-xl bg-primary text-on-primary text-xs font-bold shadow-xs hover:bg-primary-container transition-all"
+                  title={`التالي: ${nextOp.title}`}
+                >
+                  <span>التالي</span>
+                  <span className="material-symbols-outlined text-sm">arrow_back</span>
+                </Link>
+              ) : (
+                <Link
+                  href="/stage-2"
+                  className="flex items-center gap-1 px-3 py-1 rounded-xl bg-secondary text-on-secondary text-xs font-bold shadow-xs hover:brightness-105 transition-all"
+                >
+                  <span>المرحلة ٢</span>
+                  <span className="material-symbols-outlined text-sm">school</span>
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       )}

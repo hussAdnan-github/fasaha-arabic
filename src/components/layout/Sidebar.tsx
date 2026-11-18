@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLearning } from "@/context/LearningContext";
 
 const stage1Operations = [
-  { number: 1, title: "المفردات المصورة", href: "/", icon: "menu_book" },
+  { number: 1, title: "المفردات المصورة", href: "/vocabulary", icon: "menu_book" },
   { number: 2, title: "أفراد الأسرة والإشارة", href: "/family-and-gender", icon: "group" },
   { number: 3, title: "سلم القواعد: النحو", href: "/grammar-ladder", icon: "stairs" },
   { number: 4, title: "المحادثة اليومية", href: "/daily-dialogue", icon: "forum" },
@@ -30,25 +30,36 @@ export default function Sidebar() {
   const { currentLevel, formatArabic, playFeedbackSound } = useLearning();
 
   const isStage2Route = pathname.startsWith("/stage-2");
-  const [activeStageTab, setActiveStageTab] = useState<"stage1" | "stage2">(
-    isStage2Route ? "stage2" : "stage2" // Set stage2 as default active stage!
-  );
+  const isHubRoute = pathname === "/";
+  const [userSelectedTab, setUserSelectedTab] = useState<"stage1" | "stage2" | null>(null);
 
-  useEffect(() => {
-    if (pathname.startsWith("/stage-2")) {
-      setActiveStageTab("stage2");
-    }
-  }, [pathname]);
-
-  const stage1 = currentLevel.stages[0];
-  const stage2 = currentLevel.stages[1];
-
-  const currentDisplayStage = activeStageTab === "stage2" ? stage2 : stage1;
+  const activeStageTab = userSelectedTab ?? (isStage2Route ? "stage2" : "stage1");
 
   return (
     <aside className="fixed right-0 top-20 bottom-0 w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 hidden md:flex flex-col py-space-md px-space-md border-l border-surface-container overflow-y-auto">
-      {/* 1. Active Level & Stage Header Card */}
-      <div className="mb-space-md p-3.5 rounded-2xl bg-gradient-to-br from-primary-fixed/30 to-secondary-fixed/20 border border-primary/25 shadow-xs flex flex-col gap-2">
+      {/* 1. Level Hub Quick Access */}
+      <Link
+        href="/"
+        className={`mb-3 p-3 rounded-2xl flex items-center justify-between border transition-all ${
+          isHubRoute
+            ? "bg-primary text-on-primary border-primary shadow-sm ring-2 ring-primary/20"
+            : "bg-surface-container-low hover:bg-surface-container text-on-surface border-surface-container"
+        }`}
+      >
+        <div className="flex items-center gap-2">
+          <span className="material-symbols-outlined text-xl">dashboard</span>
+          <div className="flex flex-col text-right">
+            <span className="text-xs font-bold leading-tight">مركز المستوى الأول</span>
+            <span className={`text-[10px] ${isHubRoute ? "text-primary-fixed" : "text-on-surface-variant"}`}>
+              نظرة عامة والمسار التعليمي
+            </span>
+          </div>
+        </div>
+        <span className="material-symbols-outlined text-sm rotate-180">arrow_forward</span>
+      </Link>
+
+      {/* 2. Active Level & Stage Status Card */}
+      <div className="mb-3 p-3 rounded-2xl bg-gradient-to-br from-primary-fixed/30 to-secondary-fixed/20 border border-primary/25 shadow-xs flex flex-col gap-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <span className="material-symbols-outlined text-primary text-lg">
@@ -71,8 +82,8 @@ export default function Sidebar() {
           </span>
           <span className="text-[11px] text-on-surface-variant">
             {activeStageTab === "stage2"
-              ? "المرحلة النشطة الحالية • ٩ أقسام تفاعلية"
-              : "المرحلة الأولى • مكتملة بنجاح (٥/٥)"}
+              ? "البيئة المدرسية • ٩ أقسام تفاعلية"
+              : "الأسرة والبيت • ٥ دروس متسلسلة"}
           </span>
         </div>
 
@@ -93,11 +104,11 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* 2. Stages Switcher Tabs in Level 1 */}
+      {/* 3. Stages Switcher Tabs in Level 1 */}
       <div className="flex items-center p-1 bg-surface-container-low rounded-xl mb-3 border border-surface-container text-xs font-bold">
         <button
           onClick={() => {
-            setActiveStageTab("stage1");
+            setUserSelectedTab("stage1");
             playFeedbackSound("tap");
           }}
           className={`flex-1 py-1.5 rounded-lg transition-all text-center flex items-center justify-center gap-1 cursor-pointer ${
@@ -109,13 +120,13 @@ export default function Sidebar() {
         >
           <span>المرحلة ١</span>
           <span className="text-[9px] px-1 rounded bg-primary/20 text-primary font-bold">
-            ✓
+            ٥ دروس
           </span>
         </button>
 
         <button
           onClick={() => {
-            setActiveStageTab("stage2");
+            setUserSelectedTab("stage2");
             playFeedbackSound("tap");
           }}
           className={`flex-1 py-1.5 rounded-lg transition-all text-center flex items-center justify-center gap-1 cursor-pointer ${
@@ -127,12 +138,12 @@ export default function Sidebar() {
         >
           <span>المرحلة ٢</span>
           <span className="text-[9px] px-1 rounded bg-secondary-fixed text-on-secondary-fixed font-bold">
-            النشطة
+            ٩ أقسام
           </span>
         </button>
       </div>
 
-      {/* 3. Stage Operations List */}
+      {/* 4. Stage Operations List */}
       {activeStageTab === "stage2" ? (
         <div className="flex flex-col flex-1">
           <div className="px-2 mb-2 flex items-center justify-between">
@@ -175,10 +186,10 @@ export default function Sidebar() {
         <div className="flex flex-col flex-1">
           <div className="px-2 mb-2 flex items-center justify-between">
             <span className="text-[11px] uppercase text-on-surface-variant tracking-wider font-bold">
-              عمليات المرحلة الأولى (مكتملة)
+              دروس المرحلة الأولى (٥)
             </span>
             <span className="text-[10px] font-mono text-primary font-bold">
-              ٥/٥ ✓
+              مكتملة ✓
             </span>
           </div>
 
@@ -196,8 +207,10 @@ export default function Sidebar() {
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <span className="w-5 h-5 rounded-lg flex items-center justify-center text-xs font-bold bg-primary-fixed/50 text-primary">
-                      ✓
+                    <span className={`w-5 h-5 rounded-lg flex items-center justify-center text-xs font-bold ${
+                      isActive ? "bg-white/20 text-white" : "bg-primary-fixed/50 text-primary"
+                    }`}>
+                      {op.number}
                     </span>
                     <span className="text-xs font-bold leading-tight">{op.title}</span>
                   </div>
@@ -213,19 +226,19 @@ export default function Sidebar() {
             href="/stage-2"
             className="mt-3 p-3 rounded-2xl bg-secondary text-on-secondary text-xs font-bold text-center shadow-xs hover:brightness-105 transition-all block"
           >
-            الانتقال إلى المرحلة الثانية (النشطة) ◂
+            الانتقال إلى المرحلة الثانية ◂
           </Link>
         </div>
       )}
 
-      {/* Roadmap Link */}
+      {/* 5. Roadmap Link */}
       <Link
         href="/levels"
         className="mt-auto pt-3 border-t border-surface-container flex items-center justify-between text-xs font-bold text-on-surface-variant hover:text-primary transition-colors"
       >
         <div className="flex items-center gap-1.5">
           <span className="material-symbols-outlined text-base text-primary">account_tree</span>
-          <span>خارطة مراحل المنهج كاملة</span>
+          <span>خارطة جميع المستويات</span>
         </div>
         <span className="material-symbols-outlined text-sm rotate-180">arrow_forward</span>
       </Link>

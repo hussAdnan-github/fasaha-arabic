@@ -85,11 +85,13 @@ export default function InteractivePracticePage() {
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md">
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-1.5 text-xs text-on-surface-variant flex-wrap">
-              <span className="text-primary font-bold">المستوى الأول</span>
+              <Link href="/" className="text-primary font-bold hover:underline">
+                المستوى الأول
+              </Link>
               <span className="material-symbols-outlined text-[14px]">arrow_back_ios</span>
               <span className="text-on-surface-variant font-medium">المرحلة الأولى: أسرتي وبيتي</span>
               <span className="material-symbols-outlined text-[14px]">arrow_back_ios</span>
-              <span className="text-secondary font-bold">العملية ٥: التمارين التفاعلية الشاملة</span>
+              <span className="text-secondary font-bold">الدرس ٥: التمارين التفاعلية الشاملة</span>
             </div>
 
             <div className="flex items-baseline gap-space-sm flex-wrap mt-2">
@@ -469,18 +471,18 @@ export default function InteractivePracticePage() {
 
           <div className="flex items-center gap-3 flex-wrap">
             <Link
-              href="/levels#stage-1-2"
-              className="px-6 py-3 bg-secondary text-on-secondary font-bold rounded-2xl shadow-[0_3px_0_#855300] hover:brightness-105 active:translate-y-0.5 transition-all flex items-center justify-center gap-2 text-xs"
+              href="/"
+              className="px-5 py-3 bg-surface-container-highest text-on-surface font-bold rounded-2xl shadow-xs hover:bg-surface-container transition-all flex items-center justify-center gap-2 text-xs"
             >
-              <span>المرحلة الثانية (قيد الإعداد)</span>
-              <span className="material-symbols-outlined text-lg">school</span>
+              <span className="material-symbols-outlined text-base">dashboard</span>
+              <span>خارطة المستوى الأول</span>
             </Link>
             <Link
-              href="/"
-              className="w-full sm:w-auto px-6 py-3 bg-secondary-container hover:bg-secondary-fixed-dim text-on-secondary-container font-bold rounded-2xl shadow-[0_4px_0_#855300] active:translate-y-1 active:shadow-[0_1px_0_#855300] transition-all flex items-center justify-center gap-2 text-xs"
+              href="/stage-2"
+              className="px-6 py-3 bg-secondary text-on-secondary font-bold rounded-2xl shadow-[0_4px_0_#855300] hover:brightness-105 active:translate-y-1 transition-all flex items-center justify-center gap-2 text-xs"
             >
-              <span>العودة لمفردات المرحلة الأولى</span>
-              <span className="material-symbols-outlined text-xl rotate-180">arrow_back</span>
+              <span>الانتقال للمرحلة الثانية: مدرستي وفصلي</span>
+              <span className="material-symbols-outlined text-lg">school</span>
             </Link>
           </div>
         </div>

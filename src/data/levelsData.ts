@@ -75,7 +75,7 @@ const level1Stages: StageItem[] = [
         titleArabic: "المفردات المصورة",
         titleEnglish: "Illustrated Vocabulary",
         description: "الكلمات الجوهرية مع التشكيل والصوت والنطق الدقيق",
-        href: "/",
+        href: "/vocabulary",
         icon: "menu_book",
         completed: true,
         xpReward: 100,

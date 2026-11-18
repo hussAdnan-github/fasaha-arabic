@@ -332,7 +332,7 @@ export default function Stage2SchoolPage() {
       <StageOperationsNav />
 
       {/* 2. Sleek Unified Stage 2 Header Card */}
-      <section className="relative rounded-3xl bg-surface-container-lowest p-4 sm:p-5 shadow-xs overflow-hidden mb- space-md border border-surface-container">
+      <section className="relative rounded-3xl bg-surface-container-lowest p-4 sm:p-5 shadow-xs overflow-hidden mb-4 border border-surface-container">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
           {/* Title & Stage Identity */}
           <div className="flex flex-col gap-1">
