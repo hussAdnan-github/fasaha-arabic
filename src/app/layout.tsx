@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import MobileNav from "@/components/layout/MobileNav";
 
+
 export const metadata: Metadata = {
   title: "لغتي • المستوى الأول لتعليم العربية",
   description: "منصة تفاعلية لتعليم اللغة العربية لغير الناطقين بها - المستوى الأول: الانطلاق والأساسيات",
