@@ -314,10 +314,10 @@ export default function Stage2SchoolPage() {
             </button>
           ) : (
             <Link
-              href="/levels"
+              href="/"
               className="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-primary text-on-primary hover:brightness-105 text-xs font-bold transition-all cursor-pointer shadow-xs"
             >
-              <span>🎉 أتممت المرحلة • خارطة المستويات</span>
+              <span>🎉 أتممت المرحلة • العودة للمستوى الأول</span>
               <span className="material-symbols-outlined text-sm rotate-180">arrow_forward</span>
             </Link>
           )}
@@ -413,7 +413,7 @@ export default function Stage2SchoolPage() {
       </section>
 
       {/* 3. The 4 Themed Learning Stations Stepper */}
-      <section className="mb- space-md">
+      <section className="mb-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
           {STATIONS.map((station) => {
             const isStationActive = currentStation.id === station.id;

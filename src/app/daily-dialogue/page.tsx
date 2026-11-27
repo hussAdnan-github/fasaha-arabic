@@ -415,37 +415,37 @@ export default function DailyDialoguePage() {
       </section>
 
       {/* 4. Bottom Sticky Milestone Bar */}
-      <section className="sticky bottom-4 z-40 w-full mt-auto">
-        <div className="p-space-md sm:p-space-lg bg-surface-container-lowest/95 backdrop-blur-xl rounded-2xl shadow-xl border border-surface-container flex flex-col sm:flex-row items-center justify-between gap-space-md">
-          <div className="flex items-center gap-space-md w-full sm:w-auto">
-            <div className="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary shadow-[0_2px_0_#fea619] shrink-0">
-              <span className="material-symbols-outlined text-2xl">forum</span>
+      <section className="sticky bottom-20 md:bottom-4 z-40 w-full mt-6">
+        <div className="p-3 sm:p-4 bg-surface-container-lowest/95 backdrop-blur-xl rounded-2xl shadow-lg border border-surface-container flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary shadow-[0_2px_0_#fea619] shrink-0">
+              <span className="material-symbols-outlined text-xl sm:text-2xl">forum</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-base font-bold text-on-surface">
+              <span className="text-sm sm:text-base font-bold text-on-surface">
                 أكملت حوار التحيات بطلاقة!
               </span>
-              <span className="text-xs text-on-surface-variant">
+              <span className="text-xs text-on-surface-variant hidden sm:inline">
                 أنت الآن مستعد لاختبار معلوماتك وتثبيتها في قسم التمارين التفاعلية.
               </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
             <Link
               href="/grammar-ladder"
-              className="flex items-center justify-center gap-1.5 px-space-lg h-12 sm:h-14 rounded-full bg-surface-container text-on-surface text-sm font-bold shadow-[0_4px_0_#d2d9f4] active:translate-y-[2px] active:shadow-[0_2px_0_#d2d9f4] hover:bg-surface-container-high transition-all"
+              className="flex items-center justify-center gap-1 px-3.5 h-10 sm:h-12 rounded-full bg-surface-container text-on-surface text-xs sm:text-sm font-bold hover:bg-surface-container-high transition-all"
             >
-              <span className="material-symbols-outlined text-lg">arrow_forward</span>
+              <span className="material-symbols-outlined text-base">arrow_forward</span>
               <span>سلم القواعد</span>
             </Link>
 
             <Link
               href="/interactive-practice"
-              className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-space-xl h-12 sm:h-14 rounded-full bg-primary text-on-primary text-base font-bold shadow-[0_4px_0_#005137] active:translate-y-[2px] active:shadow-[0_2px_0_#005137] hover:bg-primary-container transition-all text-center"
+              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-5 h-10 sm:h-12 rounded-full bg-primary text-on-primary text-xs sm:text-sm font-bold shadow-[0_3px_0_#005137] active:translate-y-0.5 active:shadow-[0_1px_0_#005137] hover:bg-primary-container transition-all text-center"
             >
-              <span>الانتقال للتمارين التفاعلية</span>
-              <span className="material-symbols-outlined text-xl rotate-180">arrow_back</span>
+              <span>الدرس التالي: التمارين</span>
+              <span className="material-symbols-outlined text-base rotate-180">arrow_back</span>
             </Link>
           </div>
         </div>

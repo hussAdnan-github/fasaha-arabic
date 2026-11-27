@@ -19,7 +19,6 @@ export default function Header() {
     showTashkeel,
     toggleTashkeel,
     formatArabic,
-    levels,
   } = useLearning();
 
   const [isLevelMenuOpen, setIsLevelMenuOpen] = useState(false);
@@ -38,10 +37,10 @@ export default function Header() {
   }, [isLevelMenuOpen]);
 
   return (
-    <header className="fixed top-0 inset-x-0 h-20 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 transition-all border-b border-surface-container">
-      <div className="w-full h-full px-2.5 sm:px-space-md md:px-space-lg flex items-center justify-between gap-2 sm:gap-space-md max-w-7xl mx-auto">
+    <header className="fixed top-0 inset-x-0 h-16 sm:h-20 bg-surface-container-lowest/95 backdrop-blur-xl shadow-xs z-50 transition-all border-b border-surface-container">
+      <div className="w-full h-full px-3 sm:px-space-md md:px-space-lg flex items-center justify-between gap-2 max-w-7xl mx-auto">
         {/* Brand & Logo */}
-        <Link href="/" className="flex items-center gap-1.5 sm:gap-space-md shrink-0 group">
+        <Link href="/" className="flex items-center gap-2 shrink-0 group">
           <div className="relative w-8 h-8 sm:w-9 sm:h-9 transition-transform group-hover:scale-105 shrink-0">
             <Image
               src="/assets/logo.svg"
@@ -52,22 +51,22 @@ export default function Header() {
             />
           </div>
           <div className="flex flex-col">
-            <span className="text-xl sm:text-2xl font-bold text-primary tracking-tight font-sans">
+            <span className="text-lg sm:text-2xl font-black text-primary tracking-tight font-sans leading-none">
               لغتي
             </span>
-            <span className="text-[10px] sm:text-xs text-on-surface-variant hidden sm:inline-block">
-              تعلم العربية بمتعة وتفاعل
+            <span className="text-[10px] sm:text-xs text-on-surface-variant font-bold hidden sm:inline-block mt-0.5">
+              المستوى الأول • A1
             </span>
           </div>
         </Link>
 
-        {/* Central Interactive Level Progress & Switcher */}
+        {/* Central Interactive Level 1 Progress & Stage Switcher (Desktop) */}
         <div ref={menuRef} className="relative hidden lg:flex flex-col items-center flex-1 max-w-md mx-space-md">
           <button
             onClick={() => setIsLevelMenuOpen(!isLevelMenuOpen)}
-            className="w-full flex flex-col p-1.5 px-3 rounded-2xl bg-surface-container-low/80 hover:bg-surface-container transition-all border border-surface-container cursor-pointer group text-right shadow-xs active:scale-[0.99]"
+            className="w-full flex flex-col p-2 px-3.5 rounded-2xl bg-surface-container-low/90 hover:bg-surface-container transition-all border border-surface-container cursor-pointer group text-right shadow-2xs active:scale-[0.99]"
             type="button"
-            title="انقر لتبديل المستوى واستعراض مراحل المستوى الأول"
+            title="انقر للتنقل بين مراحل المستوى الأول"
           >
             <div className="flex items-center justify-between w-full mb-1 text-xs">
               <div className="flex items-center gap-1.5">
@@ -75,16 +74,16 @@ export default function Header() {
                   layers
                 </span>
                 <span className="text-on-surface font-extrabold">
-                  {formatArabic("المستوى الأول")} • {isStage2 ? formatArabic("المرحلة ٢: مدرستي") : isHub ? formatArabic("مركز التعلم والمسار") : formatArabic("المرحلة ١: أسرتي")}
+                  {formatArabic("المستوى الأول")} • {isStage2 ? formatArabic("المرحلة الثانية: مدرستي") : isHub ? formatArabic("مركز التعلم والمسار") : formatArabic("المرحلة الأولى: أسرتي")}
                 </span>
-                <span className={`px-1.5 py-0.2 rounded text-[10px] font-bold ${
+                <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                   isStage2
                     ? "bg-secondary-fixed text-on-secondary-fixed"
                     : isHub
                     ? "bg-primary-fixed text-on-primary-fixed"
                     : "bg-surface-container-high text-on-surface"
                 }`}>
-                  {isStage2 ? "المرحلة ٢ (٩ أقسام)" : isHub ? "نظرة عامة" : "المرحلة ١ (٥ دروس)"}
+                  {isStage2 ? "المرحلة ٢" : isHub ? "نظرة عامة" : "المرحلة ١"}
                 </span>
               </div>
               <div className="flex items-center gap-1">
@@ -106,80 +105,77 @@ export default function Header() {
             </div>
           </button>
 
-          {/* Dropdown Menu */}
+          {/* Level 1 Focused Dropdown Menu */}
           {isLevelMenuOpen && (
-            <div className="absolute top-full mt-2 w-96 max-w-[90vw] bg-surface-container-lowest rounded-2xl shadow-2xl border border-surface-container p-3 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-              <div className="flex items-center justify-between pb-2 mb-2 border-b border-surface-container px-2">
+            <div className="absolute top-full mt-2 w-80 max-w-[90vw] bg-surface-container-lowest rounded-2xl shadow-xl border border-surface-container p-3 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              <div className="flex items-center justify-between pb-2 mb-2 border-b border-surface-container px-1">
                 <div className="flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-primary text-lg">school</span>
-                  <span className="text-xs font-bold text-on-surface">مراحل المستوى الأول التعليمي</span>
+                  <span className="material-symbols-outlined text-primary text-base">layers</span>
+                  <span className="text-xs font-bold text-on-surface">خريطة المستوى الأول</span>
                 </div>
-                <Link
-                  href="/levels"
-                  onClick={() => setIsLevelMenuOpen(false)}
-                  className="text-xs text-primary hover:underline font-bold flex items-center gap-0.5"
-                >
-                  <span>خارطة المسار</span>
-                  <span className="material-symbols-outlined text-sm rotate-180">arrow_forward</span>
-                </Link>
+                <span className="text-[10px] font-mono font-bold text-primary bg-primary-fixed/40 px-2 py-0.5 rounded-full">
+                  CEFR A1
+                </span>
               </div>
 
-              {/* Level 1 Stages Breakdown */}
-              <div className="flex flex-col gap-1.5 mb-2">
-                {/* Level Hub */}
+              {/* Level 1 Only Navigation */}
+              <div className="flex flex-col gap-1.5">
+                {/* 1. Hub */}
                 <Link
                   href="/"
                   onClick={() => setIsLevelMenuOpen(false)}
-                  className="flex items-center justify-between p-2 rounded-xl border border-surface-container bg-surface-container-low hover:bg-surface-container transition-all"
+                  className={`flex items-center justify-between p-2 rounded-xl transition-all border ${
+                    isHub
+                      ? "bg-primary-fixed/30 border-primary text-primary font-bold"
+                      : "bg-surface-container-low hover:bg-surface-container text-on-surface border-surface-container"
+                  }`}
                 >
                   <div className="flex items-center gap-2">
                     <span className="w-7 h-7 rounded-lg bg-primary text-on-primary flex items-center justify-center text-xs font-bold shrink-0">
                       <span className="material-symbols-outlined text-sm">dashboard</span>
                     </span>
                     <div className="flex flex-col">
-                      <span className="text-xs font-bold text-on-surface">
-                        مركز وبوابة المستوى الأول
-                      </span>
-                      <span className="text-[10px] text-on-surface-variant">
-                        الخارطة الشاملة لجميع مراحل ودروس المستوى
-                      </span>
+                      <span className="text-xs font-bold leading-tight">مركز المستوى الأول</span>
+                      <span className="text-[10px] text-on-surface-variant">نظرة عامة والمسار التعليمي</span>
                     </div>
                   </div>
-                  <span className="text-xs font-bold text-primary font-mono">الرئيسية ◂</span>
+                  <span className="material-symbols-outlined text-sm rotate-180 opacity-70">arrow_forward</span>
                 </Link>
 
-                {/* Stage 1 */}
+                {/* 2. Stage 1 */}
                 <Link
                   href="/vocabulary"
                   onClick={() => setIsLevelMenuOpen(false)}
-                  className="flex items-center justify-between p-2.5 rounded-xl border border-surface-container bg-surface-container-lowest hover:bg-surface-container-low transition-all"
+                  className={`flex items-center justify-between p-2 rounded-xl transition-all border ${
+                    !isHub && !isStage2
+                      ? "bg-primary-fixed/30 border-primary text-primary font-bold"
+                      : "bg-surface-container-lowest hover:bg-surface-container-low text-on-surface border-surface-container"
+                  }`}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="w-7 h-7 rounded-lg bg-primary-fixed/50 text-primary flex items-center justify-center text-xs font-bold shrink-0">
+                    <span className="w-7 h-7 rounded-lg bg-primary-fixed text-on-primary-fixed flex items-center justify-center text-xs font-bold shrink-0">
                       ١
                     </span>
                     <div className="flex flex-col">
                       <div className="flex items-center gap-1">
-                        <span className="text-xs font-bold text-on-surface">
-                          المرحلة الأولى: أسرتي وبيتي
-                        </span>
-                        <span className="px-1.5 py-0.2 rounded-full bg-primary/20 text-primary text-[9px] font-bold">
-                          ٥ دروس
-                        </span>
+                        <span className="text-xs font-bold leading-tight">المرحلة الأولى: أسرتي وبيتي</span>
+                        <span className="px-1.5 py-0.2 rounded-full bg-primary/10 text-primary text-[9px] font-bold">٥ دروس</span>
                       </div>
-                      <span className="text-[10px] text-on-surface-variant">
-                        المفردات، الإشارة، سلم القواعد، المحادثة، والتمارين
-                      </span>
+                      <span className="text-[10px] text-on-surface-variant">الكلمات، الإشارة، سلم القواعد، المحادثة</span>
                     </div>
                   </div>
-                  <span className="text-xs font-bold text-primary font-mono">ادخل ◂</span>
+                  <span className="material-symbols-outlined text-sm rotate-180 opacity-70">arrow_forward</span>
                 </Link>
 
-                {/* Stage 2 */}
+                {/* 3. Stage 2 */}
                 <Link
                   href="/stage-2"
                   onClick={() => setIsLevelMenuOpen(false)}
-                  className="flex items-center justify-between p-2.5 rounded-xl border border-secondary/40 bg-secondary-fixed/20 hover:bg-secondary-fixed/30 transition-all"
+                  className={`flex items-center justify-between p-2 rounded-xl transition-all border ${
+                    isStage2
+                      ? "bg-secondary-fixed/40 border-secondary text-secondary font-bold"
+                      : "bg-surface-container-lowest hover:bg-surface-container-low text-on-surface border-surface-container"
+                  }`}
                 >
                   <div className="flex items-center gap-2">
                     <span className="w-7 h-7 rounded-lg bg-secondary text-on-secondary flex items-center justify-center text-xs font-bold shrink-0">
@@ -187,157 +183,92 @@ export default function Header() {
                     </span>
                     <div className="flex flex-col">
                       <div className="flex items-center gap-1">
-                        <span className="text-xs font-bold text-on-surface">
-                          المرحلة الثانية: مدرستي وفصلي
-                        </span>
-                        <span className="px-1.5 py-0.2 rounded-full bg-secondary text-on-secondary text-[9px] font-bold">
-                          ٩ أقسام
-                        </span>
+                        <span className="text-xs font-bold leading-tight">المرحلة الثانية: مدرستي وفصلي</span>
+                        <span className="px-1.5 py-0.2 rounded-full bg-secondary-fixed text-on-secondary-fixed text-[9px] font-bold">٩ أقسام</span>
                       </div>
-                      <span className="text-[10px] text-on-surface-variant">
-                        المشهد، النحو، ظروف المكان، وتأنيث المهن
-                      </span>
+                      <span className="text-[10px] text-on-surface-variant">صرح المدرسة، النحو، وظروف المكان</span>
                     </div>
                   </div>
-                  <span className="text-xs font-bold text-secondary font-mono">ادخل ◂</span>
-                </Link>
-              </div>
-
-              {/* Other Levels Preview */}
-              <div className="pt-2 border-t border-surface-container">
-                <div className="flex items-center justify-between px-1 mb-1 text-[11px] font-bold text-on-surface-variant">
-                  <span>المستويات اللاحقة في المنهج:</span>
-                  <span className="text-[10px] text-outline">تُفتح بعد إتمام المستوى الأول</span>
-                </div>
-                <div className="flex flex-col gap-1">
-                  {levels.slice(1).map((lvl) => (
-                    <div
-                      key={lvl.id}
-                      className="flex items-center justify-between p-1.5 px-2 rounded-lg bg-surface-container-low/40 opacity-70 text-xs"
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className="w-5 h-5 rounded bg-surface-container flex items-center justify-center text-[10px] font-bold text-on-surface-variant">
-                          {lvl.number}
-                        </span>
-                        <span className="text-on-surface font-medium">{lvl.titleArabic.split(":")[0]}</span>
-                      </div>
-                      <span className="material-symbols-outlined text-outline text-sm">lock</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-2 mt-2 border-t border-surface-container">
-                <Link
-                  href="/levels"
-                  onClick={() => setIsLevelMenuOpen(false)}
-                  className="w-full py-2 px-3 rounded-xl bg-primary text-on-primary text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm hover:brightness-105 transition-all"
-                >
-                  <span className="material-symbols-outlined text-base">map</span>
-                  <span>عرض خارطة وتفاصيل المستويات كاملة</span>
+                  <span className="material-symbols-outlined text-sm rotate-180 opacity-70">arrow_forward</span>
                 </Link>
               </div>
             </div>
           )}
         </div>
 
-        {/* Gamification Counters & Profile */}
-        <div className="flex items-center gap-1 sm:gap-1.5 md:gap-space-md shrink-0">
-          {/* Streak */}
+        {/* Gamification Counters & Controls (Mobile & Desktop) */}
+        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+          {/* Streak Badge */}
           <div
-            className="flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1 bg-secondary-fixed/50 rounded-full shadow-[0_2px_0_#fea619] transition-transform hover:scale-105 shrink-0"
+            className="flex items-center gap-0.5 sm:gap-1 px-2 py-1 bg-secondary-fixed/40 rounded-full shadow-2xs shrink-0"
             title={`${streakDays} أيام متتالية`}
           >
-            <span className="material-symbols-outlined text-secondary-container text-base sm:text-lg">
+            <span className="material-symbols-outlined text-secondary-container text-sm sm:text-base">
               local_fire_department
             </span>
-            <span className="text-xs font-bold text-on-secondary-fixed">
-              {streakDays} <span className="hidden sm:inline">أيام</span>
+            <span className="text-xs font-bold text-on-secondary-fixed font-mono">
+              {streakDays}
             </span>
           </div>
 
           {/* Points / XP */}
           <div
-            className="flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1 bg-tertiary-fixed/50 rounded-full shadow-[0_2px_0_#007bb9] transition-transform hover:scale-105 shrink-0"
-            title={`${points} نقطة خبرة`}
+            className="flex items-center gap-0.5 sm:gap-1 px-2 py-1 bg-tertiary-fixed/40 rounded-full shadow-2xs shrink-0"
+            title={`${points} نقطة XP`}
           >
-            <span className="material-symbols-outlined text-tertiary text-base sm:text-lg">
+            <span className="material-symbols-outlined text-tertiary text-sm sm:text-base">
               diamond
             </span>
-            <span className="text-xs font-bold text-on-tertiary-fixed">
-              {points} <span className="hidden sm:inline">نقطة</span>
+            <span className="text-xs font-bold text-on-tertiary-fixed font-mono">
+              {points}
             </span>
           </div>
 
           {/* Hearts */}
           <div
-            className="flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1 bg-error-container/40 rounded-full shadow-[0_2px_0_#ba1a1a] transition-transform hover:scale-105 shrink-0"
-            title={`${hearts} قلوب متبقية`}
+            className="flex items-center gap-0.5 sm:gap-1 px-2 py-1 bg-error-container/30 rounded-full shadow-2xs shrink-0"
+            title={`${hearts} قلوب`}
           >
-            <span className="material-symbols-outlined text-error text-base sm:text-lg">
+            <span className="material-symbols-outlined text-error text-sm sm:text-base">
               favorite
             </span>
-            <span className="text-xs font-bold text-on-error-container">
-              {hearts} <span className="hidden sm:inline">قلوب</span>
+            <span className="text-xs font-bold text-on-error-container font-mono">
+              {hearts}
             </span>
           </div>
 
-          {/* Tashkeel Global Toggle Switch */}
+          {/* Tashkeel Quick Switch Button */}
           <button
             onClick={toggleTashkeel}
             type="button"
             role="switch"
             aria-checked={showTashkeel}
-            title={showTashkeel ? "تعطيل إظهار التشكيل في كامل المنصة" : "تفعيل إظهار التشكيل في كامل المنصة"}
-            className={`flex items-center gap-1.5 px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border transition-all cursor-pointer select-none active:scale-95 shadow-xs shrink-0 ${
+            title={showTashkeel ? "إخفاء التشكيل" : "إظهار التشكيل"}
+            className={`w-8 h-8 sm:w-auto sm:px-2.5 sm:py-1 rounded-full border transition-all flex items-center justify-center gap-1 cursor-pointer select-none active:scale-95 shadow-2xs shrink-0 ${
               showTashkeel
-                ? "bg-primary/10 border-primary/30 text-primary hover:bg-primary/15"
+                ? "bg-primary text-on-primary border-primary shadow-xs"
                 : "bg-surface-container border-surface-container-high text-on-surface-variant hover:bg-surface-container-high"
             }`}
           >
-            <span className="material-symbols-outlined text-[17px] sm:text-[18px]">
-              format_size
+            <span className="text-xs font-bold font-sans">
+              {showTashkeel ? "تَ" : "ت"}
             </span>
             <span className="text-xs font-bold hidden md:inline">
-              {showTashkeel ? "التَّشْكِيل: مُفَعَّل" : "التشكيل: مُعطّل"}
+              {showTashkeel ? "تشكيل" : "بدون"}
             </span>
-            <span className="text-xs font-bold hidden sm:inline md:hidden">
-              {showTashkeel ? "تَشْكِيل" : "تشكيل"}
-            </span>
-            <div
-              className={`w-6 h-3.5 sm:w-7 sm:h-4 rounded-full p-0.5 relative transition-colors duration-200 flex items-center ${
-                showTashkeel ? "bg-primary" : "bg-outline-variant"
-              }`}
-            >
-              <div
-                className={`w-2.5 h-2.5 sm:w-3 sm:h-3 bg-white rounded-full transition-transform duration-200 shadow-xs ${
-                  showTashkeel ? "translate-x-0" : "-translate-x-2.5 sm:-translate-x-3"
-                }`}
-              />
-            </div>
           </button>
 
-          {/* Mute/Sound Toggle */}
+          {/* Sound Mute/Unmute Quick Button */}
           <button
             onClick={toggleMute}
-            className="hidden sm:flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface transition-all active:scale-95 shrink-0"
             type="button"
-            title={isMuted ? "تشغيل المؤثرات الصوتية" : "كتم المؤثرات الصوتية"}
+            title={isMuted ? "تشغيل الصوت" : "كتم الصوت"}
+            className="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant flex items-center justify-center transition-all cursor-pointer border border-surface-container shrink-0"
           >
-            <span className="material-symbols-outlined text-base sm:text-lg">
+            <span className="material-symbols-outlined text-base">
               {isMuted ? "volume_off" : "volume_up"}
             </span>
           </button>
-
-          {/* Logo Avatar */}
-          <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden ring-2 ring-primary/20 shadow-sm shrink-0 bg-surface-container-lowest p-0.5">
-            <Image
-              src="/assets/logo.png"
-              alt="Fasaha Logo"
-              fill
-              className="object-contain"
-            />
-          </div>
         </div>
       </div>
     </header>

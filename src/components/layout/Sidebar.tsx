@@ -7,7 +7,7 @@ import { useLearning } from "@/context/LearningContext";
 
 const stage1Operations = [
   { number: 1, title: "المفردات المصورة", href: "/vocabulary", icon: "menu_book" },
-  { number: 2, title: "أفراد الأسرة والإشارة", href: "/family-and-gender", icon: "group" },
+  { number: 2, title: "أفراد الأسرة والإشارة", href: "/family-and-gender", icon: "home" },
   { number: 3, title: "سلم القواعد: النحو", href: "/grammar-ladder", icon: "stairs" },
   { number: 4, title: "المحادثة اليومية", href: "/daily-dialogue", icon: "forum" },
   { number: 5, title: "التمارين التفاعلية", href: "/interactive-practice", icon: "sports_esports" },
@@ -37,12 +37,12 @@ export default function Sidebar() {
 
   return (
     <aside className="fixed right-0 top-20 bottom-0 w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 hidden md:flex flex-col py-space-md px-space-md border-l border-surface-container overflow-y-auto">
-      {/* 1. Level Hub Quick Access */}
+      {/* 1. Level Hub Link */}
       <Link
         href="/"
         className={`mb-3 p-3 rounded-2xl flex items-center justify-between border transition-all ${
           isHubRoute
-            ? "bg-primary text-on-primary border-primary shadow-sm ring-2 ring-primary/20"
+            ? "bg-primary text-on-primary border-primary shadow-xs ring-2 ring-primary/20"
             : "bg-surface-container-low hover:bg-surface-container text-on-surface border-surface-container"
         }`}
       >
@@ -51,15 +51,15 @@ export default function Sidebar() {
           <div className="flex flex-col text-right">
             <span className="text-xs font-bold leading-tight">مركز المستوى الأول</span>
             <span className={`text-[10px] ${isHubRoute ? "text-primary-fixed" : "text-on-surface-variant"}`}>
-              نظرة عامة والمسار التعليمي
+              المسار التعليمي الشامل
             </span>
           </div>
         </div>
         <span className="material-symbols-outlined text-sm rotate-180">arrow_forward</span>
       </Link>
 
-      {/* 2. Active Level & Stage Status Card */}
-      <div className="mb-3 p-3 rounded-2xl bg-gradient-to-br from-primary-fixed/30 to-secondary-fixed/20 border border-primary/25 shadow-xs flex flex-col gap-2">
+      {/* 2. Active Level 1 Card */}
+      <div className="mb-3 p-3 rounded-2xl bg-gradient-to-br from-primary-fixed/30 to-secondary-fixed/20 border border-primary/25 shadow-2xs flex flex-col gap-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <span className="material-symbols-outlined text-primary text-lg">
@@ -82,8 +82,8 @@ export default function Sidebar() {
           </span>
           <span className="text-[11px] text-on-surface-variant">
             {activeStageTab === "stage2"
-              ? "البيئة المدرسية • ٩ أقسام تفاعلية"
-              : "الأسرة والبيت • ٥ دروس متسلسلة"}
+              ? "البيئة المدرسية • ٩ أقسام"
+              : "الأسرة والبيت • ٥ دروس"}
           </span>
         </div>
 
@@ -96,9 +96,9 @@ export default function Sidebar() {
 
         <div className="flex items-center justify-between text-[11px] font-medium pt-0.5">
           <span className="text-on-surface-variant">
-            {activeStageTab === "stage2" ? "إنجاز المرحلة الثانية" : "إنجاز المرحلة الأولى"}
+            {activeStageTab === "stage2" ? "إنجاز المرحلة ٢" : "إنجاز المرحلة ١"}
           </span>
-          <span className="text-primary font-bold">
+          <span className="text-primary font-bold font-mono">
             {activeStageTab === "stage2" ? "٤٥٪" : "١٠٠٪ ✓"}
           </span>
         </div>
@@ -151,7 +151,7 @@ export default function Sidebar() {
               أقسام المرحلة الثانية (٩)
             </span>
             <Link href="/stage-2" className="text-[10px] font-bold text-secondary hover:underline">
-              فتح الصفحة
+              فتح
             </Link>
           </div>
 
@@ -224,24 +224,12 @@ export default function Sidebar() {
 
           <Link
             href="/stage-2"
-            className="mt-3 p-3 rounded-2xl bg-secondary text-on-secondary text-xs font-bold text-center shadow-xs hover:brightness-105 transition-all block"
+            className="mt-3 p-2.5 rounded-2xl bg-secondary text-on-secondary text-xs font-bold text-center shadow-xs hover:brightness-105 transition-all block"
           >
             الانتقال إلى المرحلة الثانية ◂
           </Link>
         </div>
       )}
-
-      {/* 5. Roadmap Link */}
-      <Link
-        href="/levels"
-        className="mt-auto pt-3 border-t border-surface-container flex items-center justify-between text-xs font-bold text-on-surface-variant hover:text-primary transition-colors"
-      >
-        <div className="flex items-center gap-1.5">
-          <span className="material-symbols-outlined text-base text-primary">account_tree</span>
-          <span>خارطة جميع المستويات</span>
-        </div>
-        <span className="material-symbols-outlined text-sm rotate-180">arrow_forward</span>
-      </Link>
     </aside>
   );
 }

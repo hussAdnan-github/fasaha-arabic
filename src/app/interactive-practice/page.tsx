@@ -433,56 +433,56 @@ export default function InteractivePracticePage() {
             </div>
 
             {/* Streak Pill */}
-            <div className="flex items-center gap-2 px-4 py-2.5 bg-surface-container-lowest text-on-surface rounded-2xl shadow-md">
+            <div className="flex items-center gap-2 px-3 py-2 bg-surface-container-lowest text-on-surface rounded-2xl shadow-xs">
               <span
-                className="material-symbols-outlined text-secondary-container text-2xl"
+                className="material-symbols-outlined text-secondary-container text-xl"
                 style={{ fontVariationSettings: "'FILL' 1" }}
               >
                 local_fire_department
               </span>
               <div className="flex flex-col text-right">
-                <span className="text-[11px] text-on-surface-variant font-medium">شعلة الحماس</span>
-                <span className="text-base font-bold text-on-secondary-container leading-tight">٨ أيام!</span>
+                <span className="text-[10px] text-on-surface-variant font-medium">الحماس</span>
+                <span className="text-sm font-bold text-on-secondary-container leading-tight">٨ أيام!</span>
               </div>
             </div>
 
             {/* Master Badge */}
-            <div className="flex items-center gap-2 px-4 py-2.5 bg-secondary-fixed text-on-secondary-fixed rounded-2xl shadow-md">
+            <div className="flex items-center gap-2 px-3 py-2 bg-secondary-fixed text-on-secondary-fixed rounded-2xl shadow-xs">
               <span
-                className="material-symbols-outlined text-secondary text-2xl"
+                className="material-symbols-outlined text-secondary text-xl"
                 style={{ fontVariationSettings: "'FILL' 1" }}
               >
                 military_tech
               </span>
               <div className="flex flex-col text-right">
-                <span className="text-[11px] text-on-secondary-fixed-variant font-medium">وسام جديد</span>
-                <span className="text-base font-bold leading-tight">خبير الأسرة</span>
+                <span className="text-[10px] text-on-secondary-fixed-variant font-medium">وسام</span>
+                <span className="text-sm font-bold leading-tight">خبير الأسرة</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Finish Action CTA */}
-        <div className="relative z-10 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/20">
-          <div className="flex items-center gap-2 text-on-primary/90 text-xs font-semibold">
+        <div className="relative z-10 mt-6 pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-white/20">
+          <div className="flex items-center gap-1.5 text-on-primary/90 text-xs font-semibold">
             <span className="material-symbols-outlined text-sm">flag</span>
-            تهانينا! لقد أتممت بنجاح عمليات المرحلة الأولى من المستوى الأول.
+            تهانينا! لقد أتممت بنجاح دروس المرحلة الأولى.
           </div>
 
-          <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
             <Link
               href="/"
-              className="px-5 py-3 bg-surface-container-highest text-on-surface font-bold rounded-2xl shadow-xs hover:bg-surface-container transition-all flex items-center justify-center gap-2 text-xs"
+              className="flex items-center justify-center gap-1 px-3.5 h-10 sm:h-12 rounded-full bg-surface-container-highest text-on-surface font-bold hover:bg-surface-container transition-all text-xs"
             >
               <span className="material-symbols-outlined text-base">dashboard</span>
-              <span>خارطة المستوى الأول</span>
+              <span>الرئيسية</span>
             </Link>
             <Link
               href="/stage-2"
-              className="px-6 py-3 bg-secondary text-on-secondary font-bold rounded-2xl shadow-[0_4px_0_#855300] hover:brightness-105 active:translate-y-1 transition-all flex items-center justify-center gap-2 text-xs"
+              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-5 h-10 sm:h-12 bg-secondary text-on-secondary font-bold rounded-full shadow-[0_3px_0_#855300] hover:brightness-105 active:translate-y-0.5 transition-all text-xs"
             >
-              <span>الانتقال للمرحلة الثانية: مدرستي وفصلي</span>
-              <span className="material-symbols-outlined text-lg">school</span>
+              <span>المرحلة ٢: مدرستي</span>
+              <span className="material-symbols-outlined text-base">school</span>
             </Link>
           </div>
         </div>

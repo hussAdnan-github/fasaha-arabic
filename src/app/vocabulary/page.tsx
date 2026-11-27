@@ -393,44 +393,44 @@ export default function VocabularyPage() {
       </section>
 
       {/* 4. Bottom Milestone Feedback & Tactile Sticky Progression Bar */}
-      <section className="sticky bottom-4 z-40 w-full mt-auto">
-        <div className="p-space-md sm:p-space-lg bg-surface-container-lowest/95 backdrop-blur-xl rounded-2xl shadow-xl border border-surface-container flex flex-col sm:flex-row items-center justify-between gap-space-md">
+      <section className="sticky bottom-20 md:bottom-4 z-40 w-full mt-6">
+        <div className="p-3 sm:p-4 bg-surface-container-lowest/95 backdrop-blur-xl rounded-2xl shadow-lg border border-surface-container flex flex-col sm:flex-row items-center justify-between gap-3">
           {/* Progress & Achievement Capsule */}
-          <div className="flex items-center gap-space-md w-full sm:w-auto">
-            <div className="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary shadow-[0_2px_0_#fea619] shrink-0">
-              <span className="material-symbols-outlined text-2xl">workspace_premium</span>
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary shadow-[0_2px_0_#fea619] shrink-0">
+              <span className="material-symbols-outlined text-xl sm:text-2xl">workspace_premium</span>
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
-                <span className="text-base font-bold text-on-surface">
-                  حفظت ٣ مفردات مفصلة و ٤ بطاقات سريعة!
+                <span className="text-sm sm:text-base font-bold text-on-surface">
+                  أتقنت مفردات الدرس الأول!
                 </span>
-                <span className="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-xs font-bold">
-                  +١٥ نقطة XP
+                <span className="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-[11px] font-bold">
+                  +١٥ XP
                 </span>
               </div>
-              <span className="text-xs text-on-surface-variant">
-                أنت الآن جاهز لاستخدام هذه الكلمات مع أسماء الإشارة وتكوين الجمل الأولى.
+              <span className="text-xs text-on-surface-variant hidden sm:inline">
+                أنت الآن جاهز لاستخدام هذه الكلمات مع أسماء الإشارة وشجرة العائلة.
               </span>
             </div>
           </div>
 
           {/* Action Navigation Buttons */}
-          <div className="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
             <Link
               href="/"
-              className="flex items-center justify-center gap-1.5 px-space-md h-12 sm:h-14 rounded-full bg-surface-container text-on-surface text-sm font-bold shadow-[0_4px_0_#d2d9f4] active:translate-y-[2px] active:shadow-[0_2px_0_#d2d9f4] hover:bg-surface-container-high transition-all cursor-pointer"
+              className="flex items-center justify-center gap-1 px-3.5 h-10 sm:h-12 rounded-full bg-surface-container text-on-surface text-xs sm:text-sm font-bold hover:bg-surface-container-high transition-all"
             >
-              <span className="material-symbols-outlined text-lg">dashboard</span>
-              <span>خارطة المستوى</span>
+              <span className="material-symbols-outlined text-base">dashboard</span>
+              <span>الرئيسية</span>
             </Link>
 
             <Link
               href="/family-and-gender"
-              className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-space-xl h-12 sm:h-14 rounded-full bg-primary text-on-primary text-base font-bold shadow-[0_4px_0_#005137] active:translate-y-[2px] active:shadow-[0_2px_0_#005137] hover:bg-primary-container transition-all text-center cursor-pointer"
+              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-5 h-10 sm:h-12 rounded-full bg-primary text-on-primary text-xs sm:text-sm font-bold shadow-[0_3px_0_#005137] active:translate-y-0.5 active:shadow-[0_1px_0_#005137] hover:bg-primary-container transition-all text-center"
             >
-              <span>الدرس التالي: أفراد الأسرة والإشارة</span>
-              <span className="material-symbols-outlined text-xl rotate-180">arrow_back</span>
+              <span>الدرس التالي: أفراد الأسرة</span>
+              <span className="material-symbols-outlined text-base rotate-180">arrow_back</span>
             </Link>
           </div>
         </div>

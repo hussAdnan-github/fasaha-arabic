@@ -5,9 +5,9 @@ import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import MobileNav from "@/components/layout/MobileNav";
 
-export const metadata = {
-  title: "لغتي",
-  description: "لغتي التطبيق",
+export const metadata: Metadata = {
+  title: "لغتي • المستوى الأول لتعليم العربية",
+  description: "منصة تفاعلية لتعليم اللغة العربية لغير الناطقين بها - المستوى الأول: الانطلاق والأساسيات",
   manifest: "/manifest.json",
 };
 
@@ -30,13 +30,13 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-surface font-sans text-on-surface antialiased min-h-screen">
+      <body className="bg-surface font-sans text-on-surface antialiased min-h-screen overflow-x-hidden selection:bg-primary-fixed selection:text-on-primary-fixed">
         <LearningProvider>
           <Header />
           <div className="flex w-full">
             <Sidebar />
-            <div className="w-full pr-0 md:pr-72">
-              <main className="w-full pt-20 px-space-md md:px-space-xl min-h-[calc(100vh-5rem)] pb-24 md:pb-12 max-w-7xl mx-auto">
+            <div className="w-full pr-0 md:pr-72 transition-all">
+              <main className="w-full pt-16 sm:pt-20 px-3 sm:px-space-md md:px-space-xl min-h-[calc(100vh-4rem)] pb-28 md:pb-12 max-w-7xl mx-auto">
                 {children}
               </main>
             </div>
